@@ -1,3 +1,5 @@
+from view_akinator import ViewAkinator
+
 
 class NodeAnimal:
     def __init__(self, animal, yesA=None, noA=None):
@@ -46,6 +48,7 @@ class NodeQuestion:
 class Akinator:
     def __init__(self, root=None): 
         self.__root = root 
+        self.__view_akinator = ViewAkinator() 
 
     @property
     def root(self):
@@ -53,102 +56,94 @@ class Akinator:
     
     def play(self): 
 
-        print("----- Bem vindo ao Aninator -----")
+        self.__view_akinator.mostra_mensagem("----- Pense em um animal -----")
 
-        print("----- Pense em um animal -----")
+        if self.__root == None: 
+            self.__view_akinator.mostra_mensagem("Primeira Jogada nao conheco nenhum animal")
+            animal = self.__view_akinator.pega_animal()
+            new_animal = NodeAnimal(animal)
+            self.__root = new_animal
+            
 
-        fim = True 
-        partida = True 
-        primeira = True 
-        while partida:
-        
-            if self.__root == None: 
+        elif type(self.__root) == NodeAnimal: 
+            old_animal = self.__root
+            resposta = input(f'O animal que vc pensou foi um/a {old_animal.animal} ? (s/n) \n')
+
+            if resposta == 's':
+                print(f'Eu venci!! O animal que vc pensou foi um/a {old_animal.animal}.')
+
+            elif resposta == 'n':
+                print("Eu desisto!! Voce venceu. Agora me diga: ")
                 animal = input("Qual animal vc pensou ? \n")
                 new_animal = NodeAnimal(animal)
-                self.__root = new_animal
-                print(self.__root.animal)
-                
+                pergunta = input(f'Qual a caracteristica da/o {old_animal.animal} que se difere da/o {new_animal.animal} ? \n')
+                self.__root = NodeQuestion(pergunta, old_animal, new_animal)
 
-            elif type(self.__root) == NodeAnimal: 
-                old_animal = self.__root
-                resposta = input(f'O animal que vc pensou foi um/a {old_animal.animal} ? (s/n) \n')
-
-                if resposta == 's':
-                    print(f'Eu venci!! O animal que vc pensou foi um/a {old_animal.animal}.')
-                    # um jeito de finalizar o jogo 
-
-                elif resposta == 'n':
-                    animal = input("Qual animal vc pensou ? \n")
-                    new_animal = NodeAnimal(animal)
-                    pergunta = input(f'Qual a caracteristica da/o {old_animal.animal} que se difere da/o {new_animal.animal} ? \n')
-                    self.__root = NodeQuestion(pergunta, old_animal, new_animal)
-                    # jeito de reniciar o jogo 
-
-            else:
-                old_question = self.__root
-                
-                while fim:
-                        
-                    respostaP = input(f'O animal que vc pensou {old_question.question} ? (s/n) \n')
-
-                    if respostaP == 's' and type(old_question.yesQ) == NodeAnimal:
-                        resposta = input(f'O animal que vc pensou foi um/a {old_question.yesQ.animal} ? (s/n) \n')
-
-                        if resposta == 's':
-                            print(f'Eu venci!! O animal que vc pensou foi um/a {old_question.yesQ.animal}.')
-                            break
-
-                        elif resposta == 'n':
-                            animal = input("Qual animal vc pensou ? \n")
-                            new_animal = NodeAnimal(animal)
-                            pergunta = input(f'Qual a caracteristica da/o {new_animal.animal} que se difere da/o {old_question.yesQ.animal} ? \n')
-                            new_question = NodeQuestion(pergunta, new_animal, old_question.yesQ)
-                            old_question.yesQ = new_question
-                            break
+        else:
+            old_question = self.__root
+            
+            while True:
                     
-                    elif respostaP == 's':
-                        old_question = old_question.yesQ
-                          
-                    elif respostaP == 'n' and type(old_question.noQ) == NodeAnimal:
-                        resposta = input(f'O animal que vc pensou foi um/a {old_question.noQ.animal} ? (s/n) \n')
+                respostaP = input(f'O animal que vc pensou {old_question.question} ? (s/n) \n')
 
-                        if resposta == 's':
-                            print(f'Eu venci!! O animal que vc pensou foi um/a {old_question.noQ.animal}.')
-                            break
+                if respostaP == 's' and type(old_question.yesQ) == NodeAnimal:
+                    resposta = input(f'O animal que vc pensou foi um/a {old_question.yesQ.animal} ? (s/n) \n')
 
-                        elif resposta == 'n':
-                            animal = input("Qual animal vc pensou ? \n")
-                            new_animal = NodeAnimal(animal)
-                            pergunta = input(f'Qual a caracteristica da/o {new_animal.animal} que se difere da/o {old_question.noQ.animal} ? \n')
-                            new_question = NodeQuestion(pergunta, new_animal, old_question.noQ)
-                            old_question.noQ = new_question
-                            break 
+                    if resposta == 's':
+                        print(f'Eu venci!! O animal que vc pensou foi um/a {old_question.yesQ.animal}.')
+                        break
+
+                    elif resposta == 'n':
+                        print("Eu desisto!! Voce venceu. Agora me diga: ")
+                        animal = input("Qual animal vc pensou ? \n")
+                        new_animal = NodeAnimal(animal)
+                        pergunta = input(f'Qual a caracteristica da/o {new_animal.animal} que se difere da/o {old_question.yesQ.animal} ? \n')
+                        new_question = NodeQuestion(pergunta, new_animal, old_question.yesQ)
+                        old_question.yesQ = new_question
+                        break
                         
-                    elif respostaP == 'n':
-                        old_question = old_question.noQ 
-                    
-    def menu(self):
-        print("-------- ANINATOR ----------")
-        print("Escolha a opcao")
-        print("1 - Jogar")
-        print("2 - Carregar Jogo")
-        print("0-  Sair")
+                elif respostaP == 'n' and type(old_question.noQ) == NodeAnimal:
+                    resposta = input(f'O animal que vc pensou foi um/a {old_question.noQ.animal} ? (s/n) \n')
 
-        opcao = int(input("Escolha a opcao: "))
+                    if resposta == 's':
+                        print(f'Eu venci!! O animal que vc pensou foi um/a {old_question.noQ.animal}.')
+                        break
 
-        return opcao 
+                    elif resposta == 'n':
+                        print("Eu desisto!! Voce venceu. Agora me diga: ")
+                        animal = input("Qual animal vc pensou ? \n")
+                        new_animal = NodeAnimal(animal)
+                        pergunta = input(f'Qual a caracteristica da/o {new_animal.animal} que se difere da/o {old_question.noQ.animal} ? \n')
+                        new_question = NodeQuestion(pergunta, new_animal, old_question.noQ)
+                        old_question.noQ = new_question
+                        break 
+                
+                elif respostaP == 's':
+                    old_question = old_question.yesQ
+
+                elif respostaP == 'n':
+                    old_question = old_question.noQ 
+
+        self.abre_menu() 
+
     
-    def abre_menu(self):
+    def abre_menu_principal(self):
         lista_opcoes = {1: self.play}
 
         continua = True
         while continua:
-            lista_opcoes[self.menu()]()
+            lista_opcoes[self.__view_akinator.menu_principal()]()
     
     def start(self):
-        self.abre_tela() 
+        self.abre_menu_principal()
 
+    def abre_menu(self):
+        lista_opcoes = {1: self.play, 0: self.abre_menu_principal}
+
+        continua = True 
+        while continua:
+            lista_opcoes[self.__view_akinator.menu()]() 
 
 animal1 = NodeAnimal("Baleia")
-A = Akinator(animal1) 
+A = Akinator() 
 A.start()
