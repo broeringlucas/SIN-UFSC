@@ -19,30 +19,28 @@ class ViewAkinator():
     opcao = self.le_num_inteiro(("Escolha uma opcao: "), [1, 2, 0])
     return opcao
 
-  # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
   def pega_animal(self):
     animal = input("Qual animal vc pensou ? \n")
 
     return animal
 
-  # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
-  def faz_pergunta(self):
-     resposta =  input(f'Qual a caracteristica da/o {new_animal.animal} que se difere da/o {old_question.yesQ.animal} ? \n')
+  def qual_caracteristica(self, animal1, animal2):
+    resposta =  input(f'Qual a caracteristica da/o {animal1} que se difere da/o {animal2} ? \n')
 
-  # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
-  def seleciona_amigo(self):
-    cpf = input("CPF do amigo que deseja selecionar: ")
-    return cpf
+    return resposta
+  
+  def qual_animal(self, animal):
+    resposta = input(f'O animal que vc pensou foi um/a {animal} ? (s/n) \n')
 
+    return resposta
+
+  def faz_pergunta(self, carac):
+     resposta = input(f'O animal que vc pensou {carac} ? (s/n) \n')
+
+     return resposta 
+  
   def mostra_mensagem(self, msg):
     print(msg)
-
-  # def verificar_int(self, num):
-  #   if type(num) == :
-  #     return num 
-  #   else:
-  #     opcao = input("Opcao invalida!! Escolha outra opcao: ")
-  #     return opcao 
 
   def le_num_inteiro(self, mensagem = "", ints_validos = None):
       while True:

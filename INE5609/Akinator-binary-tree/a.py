@@ -67,16 +67,21 @@ class Akinator:
 
         elif type(self.__root) == NodeAnimal: 
             old_animal = self.__root
-            resposta = input(f'O animal que vc pensou foi um/a {old_animal.animal} ? (s/n) \n')
+            resposta = self.__view_akinator.qual_animal(old_animal.animal)
+            # resposta = input(f'O animal que vc pensou foi um/a {old_animal.animal} ? (s/n) \n')
 
             if resposta == 's':
-                print(f'Eu venci!! O animal que vc pensou foi um/a {old_animal.animal}.')
+                self.__view_akinator.mostra_mensagem(f'Eu venci!! O animal que vc pensou foi um/a {old_animal.animal}.')
+                # print(f'Eu venci!! O animal que vc pensou foi um/a {old_animal.animal}.')
 
             elif resposta == 'n':
-                print("Eu desisto!! Voce venceu. Agora me diga: ")
-                animal = input("Qual animal vc pensou ? \n")
+                self.__view_akinator.mostra_mensagem("Eu desisto!! Voce venceu. Agora me diga: ")
+                # print("Eu desisto!! Voce venceu. Agora me diga: ")
+                animal = self.__view_akinator.pega_animal() 
+                # animal = input("Qual animal vc pensou ? \n")
                 new_animal = NodeAnimal(animal)
-                pergunta = input(f'Qual a caracteristica da/o {old_animal.animal} que se difere da/o {new_animal.animal} ? \n')
+                # pergunta = input(f'Qual a caracteristica da/o {old_animal.animal} que se difere da/o {new_animal.animal} ? \n')
+                pergunta = self.__view_akinator.qual_caracteristica(old_animal.animal, new_animal.animal)
                 self.__root = NodeQuestion(pergunta, old_animal, new_animal)
 
         else:
@@ -84,36 +89,47 @@ class Akinator:
             
             while True:
                     
-                respostaP = input(f'O animal que vc pensou {old_question.question} ? (s/n) \n')
+                # respostaP = input(f'O animal que vc pensou {old_question.question} ? (s/n) \n')
+                respostaP = self.__view_akinator.faz_pergunta(old_question.question)
 
                 if respostaP == 's' and type(old_question.yesQ) == NodeAnimal:
-                    resposta = input(f'O animal que vc pensou foi um/a {old_question.yesQ.animal} ? (s/n) \n')
+                    # resposta = input(f'O animal que vc pensou foi um/a {old_question.yesQ.animal} ? (s/n) \n')
+                    resposta = self.__view_akinator.qual_animal(old_question.yesQ.animal)
 
                     if resposta == 's':
-                        print(f'Eu venci!! O animal que vc pensou foi um/a {old_question.yesQ.animal}.')
+                        # print(f'Eu venci!! O animal que vc pensou foi um/a {old_question.yesQ.animal}.')
+                        self.__view_akinator.mostra_mensagem(f'Eu venci!! O animal que vc pensou foi um/a {old_question.yesQ.animal}.')
                         break
 
                     elif resposta == 'n':
-                        print("Eu desisto!! Voce venceu. Agora me diga: ")
-                        animal = input("Qual animal vc pensou ? \n")
+                        self.__view_akinator.mostra_mensagem("Eu desisto!! Voce venceu. Agora me diga: ")
+                        # print("Eu desisto!! Voce venceu. Agora me diga: ")
+                        # animal = input("Qual animal vc pensou ? \n")
+                        animal = self.__view_akinator.pega_animal() 
                         new_animal = NodeAnimal(animal)
-                        pergunta = input(f'Qual a caracteristica da/o {new_animal.animal} que se difere da/o {old_question.yesQ.animal} ? \n')
+                        # pergunta = input(f'Qual a caracteristica da/o {new_animal.animal} que se difere da/o {old_question.yesQ.animal} ? \n')
+                        pergunta = self.__view_akinator.qual_caracteristica(new_animal.animal, old_question.yesQ.animal)
                         new_question = NodeQuestion(pergunta, new_animal, old_question.yesQ)
                         old_question.yesQ = new_question
                         break
                         
                 elif respostaP == 'n' and type(old_question.noQ) == NodeAnimal:
-                    resposta = input(f'O animal que vc pensou foi um/a {old_question.noQ.animal} ? (s/n) \n')
+                    # resposta = input(f'O animal que vc pensou foi um/a {old_question.noQ.animal} ? (s/n) \n')
+                    resposta = self.__view_akinator.qual_animal(old_question.noQ.animal)
 
                     if resposta == 's':
-                        print(f'Eu venci!! O animal que vc pensou foi um/a {old_question.noQ.animal}.')
+                        # print(f'Eu venci!! O animal que vc pensou foi um/a {old_question.noQ.animal}.')
+                        self.__view_akinator.mostra_mensagem(f'Eu venci!! O animal que vc pensou foi um/a {old_question.noQ.animal}.')
                         break
 
                     elif resposta == 'n':
-                        print("Eu desisto!! Voce venceu. Agora me diga: ")
-                        animal = input("Qual animal vc pensou ? \n")
+                        # print("Eu desisto!! Voce venceu. Agora me diga: ")
+                        self.__view_akinator.mostra_mensagem("Eu desisto!! Voce venceu. Agora me diga: ")
+                        # animal = input("Qual animal vc pensou ? \n")
+                        animal = self.__view_akinator.pega_animal() 
                         new_animal = NodeAnimal(animal)
-                        pergunta = input(f'Qual a caracteristica da/o {new_animal.animal} que se difere da/o {old_question.noQ.animal} ? \n')
+                        # pergunta = input(f'Qual a caracteristica da/o {new_animal.animal} que se difere da/o {old_question.noQ.animal} ? \n')
+                        pergunta = self.__view_akinator.qual_caracteristica(new_animal.animal, old_question.noQ.animal)
                         new_question = NodeQuestion(pergunta, new_animal, old_question.noQ)
                         old_question.noQ = new_question
                         break 
@@ -127,6 +143,10 @@ class Akinator:
         self.abre_menu() 
 
     
+    def reniciar_jogo(self): 
+        self.__root = None 
+        self.play() 
+
     def abre_menu_principal(self):
         lista_opcoes = {1: self.play}
 
@@ -138,7 +158,7 @@ class Akinator:
         self.abre_menu_principal()
 
     def abre_menu(self):
-        lista_opcoes = {1: self.play, 0: self.abre_menu_principal}
+        lista_opcoes = {1: self.play, 2: self.reniciar_jogo, 0: self.abre_menu_principal}
 
         continua = True 
         while continua:
