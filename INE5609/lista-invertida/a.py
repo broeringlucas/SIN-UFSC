@@ -212,7 +212,7 @@ L.add_registro(registro2)
 L.add_registro(registro3)
 # L.del_registro(1)
 # L.del_registro(3)
-L.busca_simples('ABD')
+# L.busca_simples('ABD')
 # L.busca_composta('Palhoca', 'Avai')
 # L.mostrar_todos() 
 
