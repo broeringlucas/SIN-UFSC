@@ -1,0 +1,336 @@
+[
+  { 
+    "id": 1,
+    "name": "Beto Carrero World",
+    "address": {
+      "street": " Rod. Beto Carrero World - Praia de Armação do Itapocorói",
+      "city": "Penha",
+      "UF": "SC",
+      "zipcode": "88385-000",
+      "geo": {
+        "lat": "-26.7995893",
+        "lng": "-48.6142063"
+      }
+    },
+    "horario_funcionamento": "10AM - 7PM",
+    "mapa": "https://www.google.com/maps/place/Beto+Carrero+World/data=!4m7!3m6!1s0x94d8d1b8b66ca63b:0xe972b998081420db!8m2!3d-26.7995893!4d-48.6142063!16s%2Fm%2F03wcttx!19sChIJO6ZstrjR2JQR2yAUCJi5cuk?     authuser=0&hl=en&rclk=1",
+    "images": [
+      "https://static.ndmais.com.br/2023/04/castelo-das-nacoes-beto-carrero-world-1-scaled.jpg",
+      "https://vipzinho.com.br/wp-content/uploads/2022/02/Beto-carrero-World1.jpg",
+      "https://cdn.zarpou.com.br/zarpou/servicos/ingresso-beto-carrero-world-63ed02022d4ac-large.jpg"
+    ],
+    "logo": "https://agendamento.betocarrero.com.br/Imagens/Sistema/Logo.png",
+    "video": "https://www.youtube.com/watch?v=dYXoJnbnBsY&ab_channel=BetoCarreroWorld",
+    "social_midia": {
+      "facebook": "https://facebook.com/betocarreroworld/",
+      "instagram": "https://instagram.com/betocarrero/"
+    },
+    "ticket_price": "a partir de R$ 139,90",
+    "buy_tickets": "https://www.betocarrero.com.br/passaportes",
+    "contact": {
+      "phone": "+55 47 3261-2222",
+      "email": "suporteonline@betocarrero.com.br",
+      "website": "https://www.betocarrero.com.br"
+    }
+  },
+    { 
+    "id": 2,
+    "name": "Parque Aquático Cascanéia",
+    "address": {
+      "street": "R. José Patrocínio dos Santos, 2355 - Belchior Central",
+      "city": "Gaspar",
+      "UF": "SC",
+      "zipcode": "89117-620",
+      "geo": {
+        "lat": "-26.8435595",
+        "lng": "-49.0284674"
+      }
+    },
+    "horario_funcionamento": "9AM - 18PM",
+    "mapa": "https://www.google.com/maps/place/Parque+Aqu%C3%A1tico+Cascan%C3%A9ia/@-26.8384475,-49.0157215,15z/data=!4m2!3m1!1s0x0:0xbf9c3ec78891b880?sa=X&ved=2ahUKEwjjzszz6IeBAxUDrJUCHWKiCGIQ_BJ6BAhhEAA&hl=en&ved=2ahUKEwjjzszz6IeBAxUDrJUCHWKiCGIQ_BJ6BAhyEAg",
+    "images": [
+      "https://www.cascaneia.com.br/uploads/imagens/800x600_47_7558201222175306.jpg",
+      "https://fuinessaviagem.com/wp-content/uploads/2016/11/parque-aquatico-cascaneia-atracoes.jpg"
+    ],
+    "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2-zdF8ewauhl6GqG9hSxyBMEh0iNZJTpfnkL9dqoi-g&s",
+    "video": "https://youtu.be/5d4JbjBw3w4",
+    "social_midia": {
+      "facebook": "https://www.facebook.com/parqueaquaticocascaneia/",
+      "instagram": "https://www.instagram.com/cascaneia/"
+    },
+    "ticket_price": "a partir de R$ 60",
+    "buy_tickets": "https://www.cascaneia.com.br/loja/",
+    "contact": {
+      "phone": "+55 47 3308-1600",
+      "email": "cascaneia@cascaneia.com.br",
+      "website": "https://www.cascaneia.com.br/"
+    }
+  },
+  { 
+    "id": 3,
+    "name": "Água Show Park",
+    "address": {
+      "street": "Rodovia Armando Calil Bullos, SC-403, 3868 - Ingleses Norte",
+      "city": "Florianópolis",
+      "UF": "SC",
+      "zipcode": " 88058-000",
+      "geo": {
+        "lat": "-27.4445939",
+        "lng": "-48.4194286"
+      }
+    },
+    "horario_funcionamento": "10AM - 5PM",
+    "mapa": "https://www.google.com/maps/place/Show+Water+Park/@-27.4445939,-48.4194286,15z/data=!4m2!3m1!1s0x0:0x9b8336ca2bd39296?sa=X&ved=2ahUKEwjErb6q8YeBAxXznpUCHdrvCt4Q_BJ6BAhHEAA&ved=2ahUKEwjErb6q8YeBAxXznpUCHdrvCt4Q_BJ6BAhhEAg",
+    "images": [
+      "https://www.aguashowpark.com.br/wp-content/uploads/faq.png",
+      "https://www.aguashowpark.com.br/wp-content/themes/aguashowpark/images/calendario-img.jpg"
+    ],
+    "logo": "https://www.aguashowpark.com.br/wp-content/themes/aguashowpark/images/sem_imagem_475x380.jpg",
+    "video": "https://www.youtube.com/watch?v=yJDcxwCQHRI&ab_channel=IdeiasFilmes-ProdutoradeV%C3%ADdeos",
+    "social_midia": {
+      "facebook": "https://www.facebook.com/aguashowpark",
+      "instagram": "https://www.instagram.com/aguashowpark/"
+    },
+    "ticket_price": "a partir de R$ 65",
+    "buy_tickets": "https://www.aguashowpark.com.br/loja/",
+    "contact": {
+      "phone": "+55 48 3369-2132",
+      "email": "contato@aguashowpark.com.br",
+      "website": "https://www.aguashowpark.com.br/"
+    }
+  },
+  { 
+    "id": 4,
+    "name": "Thermas dos Laranjais",
+    "address": {
+      "street": "Av. do Folclore, 1543 - Jardim Santa Efigênia",
+      "city": "Olímpia",
+      "UF": "SP",
+      "zipcode": "15405-014",
+      "geo": {
+        "lat": "-20.7218064",
+        "lng": "-48.9176384"
+      }
+    },
+    "horario_funcionamento": "9AM - 5PM",
+    "mapa": "https://www.google.com/maps/place/Thermas+dos+Laranjais/@-20.7218064,-48.9176384,15z/data=!4m2!3m1!1s0x0:0xf64f5b329d1e135d?sa=X&ved=2ahUKEwjDj5Wy9YeBAxVkjZUCHX51A-0Q_BJ6BAhjEAA&ved=2ahUKEwjDj5Wy9YeBAxVkjZUCHX51A-0Q_BJ6BQiCARAI",
+    "images": [
+      "https://www.termas.com.br/images/bg-video-home.jpg",
+      "https://www.melhoresdestinos.com.br/wp-content/uploads/2022/02/parque-aquatico-olimpia-thermas-dos-laranjais-capa-02.jpg",
+      "https://admin.panrotas.com.br/media/thumb/cropper/permalink/fix/1200,900/?source=media-files-original/2019/08/27/3b6841d8b43c1cac06122302c76d4447-thermasdoslaranjais.jpg"
+    ],
+    "logo": "https://www.turisolimpia.com.br/turisolimpia/img/300px/turis-olimpia-representativa-ingressos-thermas-dos-laranjais-olimpia-sp-62094030a449b_0.png",
+    "video": "https://www.youtube.com/watch?v=Q6ilTBh8YMQ&ab_channel=ThermasdosLaranjaisOficial",
+    "social_midia": {
+      "facebook": "https://www.facebook.com/thermasdoslaranjaisoficial",
+      "instagram": "https://www.instagram.com/thermasdoslaranjaisoficial/"
+    },
+    "ticket_price": "a partir de R$ 80",
+    "buy_tickets": "https://www.termas.com.br/informacoes/promocoes",
+    "contact": {
+      "phone": "+55 17 3279 3500",
+      "email": "contato@aguashowpark.com.br",
+      "website": "https://www.termas.com.br/"
+    }
+  },
+  { 
+    "id": 5,
+    "name": "Wet'n Wild",
+    "address": {
+      "street": "Estr. Serra Azul, 1000 - Jardim Alegre",
+      "city": "Itupeva",
+      "UF": "SP",
+      "zipcode": "13299-602",
+      "geo": {
+        "lat": "-23.1019074",
+        "lng": "-47.0093155"
+      }
+    },
+    "horario_funcionamento": "11AM - 8PM",
+    "mapa": "https://www.google.com/maps/place/Wet'n+Wild/@-23.1019074,-47.0093155,15z/data=!4m2!3m1!1s0x0:0x7995c7020fd30b9e?sa=X&ved=2ahUKEwi7yMnA9oeBAxVVq5UCHQDYDGAQ_BJ6BAhIEAA&ved=2ahUKEwi7yMnA9oeBAxVVq5UCHQDYDGAQ_BJ6BAhsEAg",
+    "images": [
+      "https://www.melhoresdestinos.com.br/wp-content/uploads/2023/03/wet-wild-capa.jpg",
+      "https://static.wixstatic.com/media/d978d9_87263c20e12a4741a755e8af7e404d41~mv2.jpg/v1/fill/w_640,h_426,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/d978d9_87263c20e12a4741a755e8af7e404d41~mv2.jpg"
+    ],
+    "logo": "https://www.wetnwild.com.br/img/default/facebook-logo.png",
+    "video": "https://www.youtube.com/watch?v=NYOfOqPytfI&ab_channel=Wet%27nWild",
+    "social_midia": {
+      "facebook": "https://www.facebook.com/thermasdoslaranjaisoficial",
+      "instagram": "https://www.instagram.com/thermasdoslaranjaisoficial/"
+    },
+    "ticket_price": "a partir de R$ 129",
+    "buy_tickets": "https://wetshop.com.br/",
+    "contact": {
+      "phone": "+55 11 4496-8000",
+      "email": "atendimento@wetnwild.com.br",
+      "website": "https://www.wetnwild.com.br/"
+    }
+  },
+  { 
+    "id": 6,
+    "name": "Beach Park",
+    "address": {
+      "street": "Rua Porto das Dunas, 2734 - Porto das Dunas",
+      "city": "Aquiraz",
+      "UF": "CE",
+      "zipcode": "61700-000",
+      "geo": {
+        "lat": "-3.8438548",
+        "lng": "-38.4728538"
+      }
+    },
+    "horario_funcionamento": "10:30AM - 5:30PM",
+    "mapa": "https://www.google.com/maps?s=web&opi=89978449&sca_esv=561755169&lqi=CgpCZWFjaCBQYXJrSNH5gktaHBAAEAEYABgBIgpiZWFjaCBwYXJrKgYIAhAAEAGSAQp3YXRlcl9wYXJrmgEjQ2haRFNVaE5NRzluUzBWSlEwRm5TVVJWZDJSNmNXSkJFQUWqATIQATIeEAEiGnSf18vi0hPrmQMyZi8a_9GvftSwuieJbErzMg4QAiIKYmVhY2ggcGFyaw&phdesc=CBdwQ1jK5sU&vet=12ahUKEwiw7oqI-IeBAxVjrZUCHbUJCV0Q1YkKegQIGxAB..i&cs=1&um=1&ie=UTF-8&fb=1&gl=br&sa=X&geocode=Kav54C1YXMcHMb5hJ1VnCaCo&daddr=Rua+Porto+das+Dunas,+2734+-+Porto+das+Dunas,+Aquiraz+-+CE,+61700-000",
+    "images": [
+      "https://www.melhoresdestinos.com.br/wp-content/uploads/2021/12/beach-park-fortaleza-vaikuntudo-1.jpg",
+      "https://conteudo.imguol.com.br/c/entretenimento/11/2022/01/12/vista-geral-do-acqua-park-parque-aquatico-do-beach-park-1642005829685_v2_4x3.jpg"
+    ],
+    "logo": "https://sindojus-ce.org.br/wp-content/uploads/2016/10/beach-park-logo.jpg",
+    "video": "https://www.youtube.com/watch?v=NYOfOqPytfI&ab_channel=Wet%27nWild",
+    "social_midia": {
+      "facebook": "https://www.facebook.com/BeachParkBrasil",
+      "instagram": "https://www.instagram.com/beachpark/"
+    },
+    "ticket_price": "a partir de R$ 255",
+    "buy_tickets": "https://ingresso.beachpark.com.br/",
+    "contact": {
+      "phone": "+55 85 4012-3030",
+      "email": "ingressosonline@beachpark.com.br",
+      "website": "https://www.beachpark.com.br/"
+    }
+  },
+  { 
+    "id": 7,
+    "name": "Hopi Hari",
+    "address": {
+      "street": "Rod. dos Bandeirantes, km 72 - Moinho",
+      "city": "Vinhedo ",
+      "UF": "SP",
+      "zipcode": "13288-390",
+      "geo": {
+        "lat": "-23.097736",
+        "lng": "-47.0085651"
+      }
+    },
+    "horario_funcionamento": "11AM - 8:30PM",
+    "mapa": "https://www.google.com/maps/place/Hopi+Hari/@-23.097736,-47.0085651,15z/data=!4m2!3m1!1s0x0:0x3d6c9909abd347ea?sa=X&ved=2ahUKEwiN392i-oeBAxX-vJUCHSovApQQ_BJ6BAhZEAA&ved=2ahUKEwiN392i-oeBAxX-vJUCHSovApQQ_BJ6BAh5EAg",
+    "images": [
+      "https://blogdatripsz.com.br/wp-content/uploads/2022/08/hopi.jpg",
+      "https://media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/07/36/95/15.jpg",
+      "https://classic.exame.com/wp-content/uploads/2020/03/hopi.jpg?quality=70&strip=info&w=1024"
+    ],
+    "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4Vl2K2G7_SW1-Q4gpuBQqc6GL00_gp48u5TwjUhk&s",
+    "video": "https://www.youtube.com/watch?v=wAChwCP-_XA&ab_channel=HopiHari",
+    "social_midia": {
+      "facebook": "https://www.facebook.com/HopiHari/",
+      "instagram": "https://www.instagram.com/hopihari"
+    },
+    "ticket_price": "a partir de R$ 129.90",
+    "buy_tickets": "https://www.hopihari.com.br/temporadaInstitucional#ancoraStep1",
+    "contact": {
+      "phone": "+55 11 4210-4000",
+      "email": "FALE@HOPIHARICORP.COM.BR",
+      "website": "https://www.beachpark.com.br/"
+    }
+  },
+  { 
+    "id": 8,
+    "name": "Mirabilandia",
+    "address": {
+      "street": "Av. Prof. Andrade Bezerra, 1285 - Salgadinho",
+      "city": "Olinda",
+      "UF": "PE",
+      "zipcode": "53110-110",
+      "geo": {
+        "lat": "-8.0328753",
+        "lng": "-34.8737458"
+      }
+    },
+    "horario_funcionamento": "2- 8PM",
+    "mapa": "https://www.google.com/maps/place/Mirabilandia/@-8.0328753,-34.8737458,15z/data=!4m2!3m1!1s0x0:0x60292af9f27327e2?sa=X&ved=2ahUKEwjMscyjgYiBAxX3pZUCHU4aCDYQ_BJ6BAheEAA&ved=2ahUKEwjMscyjgYiBAxX3pZUCHU4aCDYQ_BJ6BAh9EAg",
+    "images": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7cd-9z0e274Hz-bvG3nKLZ-pSbBMI_K65_nUdXV_AEC8aa-p5LoVE0Mob6WUJqanALaI",
+      "https://imagens.ne10.uol.com.br/veiculos/_midias/jpg/2023/03/15/mirabilandia_recife-22552156.jpg"
+    ],
+    "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStnFZS56on4N2tqRt3LBWYR520wdcBN5mftUo0E1lBaNun1_xRzJ_szfdq18fRYAggssM",
+    "video": "https://www.youtube.com/watch?v=KsiFgGBuDDA&ab_channel=PlaynaDivers%C3%A3o",
+    "social_midia": {
+      "facebook": "https://www.facebook.com/MirabilandiaBrasil/",
+      "instagram": "https://www.instagram.com/mirabilandiape/"
+    },
+    "ticket_price": "a partir de R$ 60,00",
+    "buy_tickets": "https://www.hopihari.com.br/temporadaInstitucional#ancoraStep1",
+    "contact": {
+      "phone": "+55 81 3366-2000",
+      "email": "sac@mirabilandia.com.br",
+      "website": "https://mirabilandia.com.br/"
+    }
+  },
+  { 
+    "id": 9,
+    "name": "Parque Guanabara",
+    "address": {
+      "street": "Av. Expedicionário Benvindo Belém de Lima, 15 - São Luiz",
+      "city": "Belo Horizonte",
+      "UF": "MG",
+      "zipcode": "31310-040",
+      "geo": {
+        "lat": "-19.8596643",
+        "lng": "-43.9784783"
+      }
+    },
+    "horario_funcionamento": "2 - 10PM",
+    "mapa": "https://www.google.com/maps/place/Parque+Guanabara/@-19.8596643,-43.9784783,15z/data=!4m2!3m1!1s0x0:0x722e6fdc15517957?sa=X&ved=2ahUKEwi_0crKg4iBAxUcq5UCHSI_Ag8Q_BJ6BAhsEAA&ved=2ahUKEwi_0crKg4iBAxUcq5UCHSI_Ag8Q_BJ6BQiKARAI",
+    "images": [
+      "https://soubh.uai.com.br/uploads/place/image/427/Parque_Guanabara_Leandro_Couri_EM_DA_Press.png",
+      "https://bhaz.com.br/wp-content/uploads/2022/11/minhocao.jpg"
+    ],
+    "logo": "https://static.wixstatic.com/media/8936e4_89c732cfae2c48999be4b6583fd2ff8a~mv2.png",
+    "video": "https://www.youtube.com/watch?v=9hG65PDDeXs&ab_channel=IguanaFilmes",
+    "social_midia": {
+      "facebook": "https://www.facebook.com/guanabarabh",
+      "instagram": "https://www.instagram.com/parqueguanabara/"
+    },
+    "ticket_price": "a partir de R$ 50,00",
+    "buy_tickets": "https://www.parqueguanabara.store/precos",
+    "contact": {
+      "phone": "+55 31 3439-7300",
+      "email": "",
+      "website": "https://www.parqueguanabara.store/"
+    }
+  },
+    { 
+    "id": 10,
+    "name": "Playcenter Family",
+    "address": {
+      "street": " Av. Aricanduva, 5555 - Vila Matilde",
+      "city": "São Paulo",
+      "UF": "SP",
+      "zipcode": "03527-900",
+      "geo": {
+        "lat": "-23.5667268",
+        "lng": "-46.5047362"
+      }
+    },
+    "horario_funcionamento": "12 - 10PM",
+    "mapa": "https://www.google.com/maps/place/Playcenter+Family/@-23.5667268,-46.5047362,15z/data=!4m2!3m1!1s0x0:0x1ac1da57fb4e41f1?sa=X&ved=2ahUKEwiKg5j7hYiBAxX-vJUCHUn-Dl0Q_BJ6BAhJEAA&ved=2ahUKEwiKg5j7hYiBAxX-vJUCHUn-Dl0Q_BJ6BAhhEAg",
+    "images": [
+      "https://www.playcenterfamily.com/uploads/attractions/mobile/140422165950995842.png",
+      "https://www.playcenterfamily.com/uploads/attractions/mobile/140422171702616081.png"
+    ],
+    "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6_JywM-I9-hjUjgFFIchh08duSfMW54TO2Jj4nmWTY9SIhBKQmafkum4-mbFOFnUCtHs",
+    "video": "https://www.youtube.com/watch?v=gfZ4bjPbSBs&ab_channel=CatracaLivre",
+    "social_midia": {
+      "facebook": "https://www.facebook.com/playcenterfamilyoficial",
+      "instagram": "https://www.instagram.com/playcenterfamilyoficial"
+    },
+    "ticket_price": "a partir de R$ 2,40",
+    "buy_tickets": "https://www.playcenterfamily.com/#facafesta",
+    "contact": {
+      "phone": "+55 31 3439-7300",
+      "email": "",
+      "website": "https://www.playcenterfamily.com/"
+    }
+  }
+]
+
