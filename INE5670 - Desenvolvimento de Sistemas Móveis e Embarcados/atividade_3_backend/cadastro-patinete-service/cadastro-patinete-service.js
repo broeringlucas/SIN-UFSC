@@ -101,11 +101,9 @@ app.delete("/patinetes/:serial", (req, res) => {
   });
 });
 
-function calcularDistancia(lat1, lon1, lat2, lon2) {}
-
 app.get("/patinetes/proximos/:lat,:long", (req, res) => {
   const { lat, long } = req.params;
-  const raioKm = 1; // Define your desired radius in kilometers
+  const raioKm = 3; // Define your desired radius in kilometers
 
   // Define the Haversine formula to calculate distances
   function haversine(lat1, lon1, lat2, lon2) {
@@ -121,10 +119,11 @@ app.get("/patinetes/proximos/:lat,:long", (req, res) => {
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     const distance = radius * c;
 
+    console.log(distance + " km");
     return distance;
   }
 
-  const queryLatLong = `SELECT latitude, longitude FROM patinetes;`;
+  const queryLatLong = `SELECT * FROM patinetes;`;
 
   // Query the database and handle the results
   db.all(queryLatLong, (err, rows) => {
