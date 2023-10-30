@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon cadastro-cliente-service.js"
+    "dev": "nodemon api-gateway.js"
   },
   "keywords": [],
   "author": "",

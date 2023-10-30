@@ -103,11 +103,10 @@ app.delete("/patinetes/:serial", (req, res) => {
 
 app.get("/patinetes/proximos/:lat,:long", (req, res) => {
   const { lat, long } = req.params;
-  const raioKm = 3; // Define your desired radius in kilometers
+  const raioKm = 1;
 
-  // Define the Haversine formula to calculate distances
   function haversine(lat1, lon1, lat2, lon2) {
-    const radius = 6371; // Earth's radius in kilometers
+    const radius = 6371;
     const dLat = (lat2 - lat1) * (Math.PI / 180);
     const dLon = (lon2 - lon1) * (Math.PI / 180);
     const a =
@@ -125,7 +124,6 @@ app.get("/patinetes/proximos/:lat,:long", (req, res) => {
 
   const queryLatLong = `SELECT * FROM patinetes;`;
 
-  // Query the database and handle the results
   db.all(queryLatLong, (err, rows) => {
     if (err) {
       console.error(err.message);
@@ -145,7 +143,20 @@ app.get("/patinetes/proximos/:lat,:long", (req, res) => {
   });
 });
 
-let port = 8080;
+app.put("/patinetes/:serial", (req, res) => {
+  const query = `UPDATE patinetes SET status = ? WHERE serial = ?`;
+  const params = [req.body.status, req.params.serial];
+  db.run(query, params, (err) => {
+    if (err) {
+      console.log(err.message);
+      res.status(500).send(err.message);
+    } else {
+      res.status(200).send("Patinete atualizado com sucesso!");
+    }
+  });
+});
+
+let port = 8090;
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
 });
