@@ -135,5 +135,5 @@ app.post(`/alugueis/devolver/:serialPatinete`, (req, res) => {
 
 port = 80;
 app.listen(port, () => {
-  console.log("Servidor rodando na porta 80");
+  console.log(`Servidor rodando na porta ${port}`);
 });
