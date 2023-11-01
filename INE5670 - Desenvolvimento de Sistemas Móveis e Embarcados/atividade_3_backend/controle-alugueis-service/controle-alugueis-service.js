@@ -64,15 +64,24 @@ app.post(`/alugueis/alugar/:serialPatinete`, (req, res) => {
       const { data } = response;
       console.log(data);
       if (data.status == "disponível") {
-        const startTime = moment().format("YYYY-MM-DD HH:mm:ss");
+        const startTime = new Date();
+        const formattedStartTime = startTime.toLocaleString();
+        console.log(formattedStartTime.get);
+        console.log(formattedStartTime);
         const query = `INSERT INTO alugueis (serialPatinete, inicio) VALUES (?, ?)`;
-        const params = [req.params.serialPatinete, startTime];
+        const params = [req.params.serialPatinete, formattedStartTime];
         db.run(query, params, (err) => {
           if (err) {
             console.log(err.message);
             res.status(500).send(err.message);
           } else {
-            res.status(200).send("Patinete alugado!");
+            axios
+              .get(`http://localhost:500/controle/bloqueio`)
+              .then((response) => {
+                res.status(200).send(response.data);
+              });
+            // res.status(200).send("Patinete alugado!");
+            console.log("Patinete alugado!");
           }
         });
         axios
@@ -85,31 +94,53 @@ app.post(`/alugueis/alugar/:serialPatinete`, (req, res) => {
           .catch((error) => {
             console.log(error);
           });
-        axios.get(`http://localhost:500/controle/bloqueio`).then((response) => {
-          res.status(200).send(response.data);
-        });
       } else {
         res.status(400).send(`Patinete ${data.serial} não está disponível`);
       }
     });
 });
 
-app.post(`/alugueis/devolver/:serialPatinete`, (req, res) => {
+app.post(`/alugueis/devolver/:serialPatinete,:numeroCartao`, (req, res) => {
   axios
     .get(`http://localhost:8090/patinetes/${req.params.serialPatinete}`)
     .then((response) => {
       const { data } = response;
       console.log(data);
       if (data.status == "alugado") {
-        const endTime = moment().format("YYYY-MM-DD HH:mm:ss");
+        const endTime = new Date();
+        const formattedEndTime = endTime.toLocaleString();
         const query = `UPDATE alugueis SET fim = ? WHERE serialPatinete = ? AND fim IS NULL`;
-        const params = [endTime, req.params.serialPatinete];
+        const params = [formattedEndTime, req.params.serialPatinete];
+        const getStartTime = `SELECT inicio FROM alugueis WHERE serialPatinete = ? AND fim = ?`;
         db.run(query, params, (err) => {
           if (err) {
             console.log(err.message);
             res.status(500).send(err.message);
           } else {
-            res.status(200).send("Patinete devolvido!");
+            axios
+              .get(`http://localhost:500/controle/desbloqueio`)
+              .then((response) => {
+                res.status(200).send(response.data);
+              });
+            db.get(
+              getStartTime,
+              [req.params.serialPatinete, formattedEndTime],
+              (err, result) => {
+                const startTime2 = new Date(result.inicio);
+                const endTime2 = new Date(formattedEndTime);
+                const diff = endTime2 - startTime2;
+                const diffMinutes = diff / 60000;
+
+                valor = diffMinutes * 0.5;
+
+                axios.post(`http://localhost:5000/pagamento/pagamento/`, {
+                  numeroCartao: req.params.numeroCartao,
+                  valor: valor,
+                });
+              }
+            );
+            // res.status(200).send("Patinete devolvido!");
+            console.log("Patinete devolvido!");
           }
         });
         axios
@@ -121,11 +152,6 @@ app.post(`/alugueis/devolver/:serialPatinete`, (req, res) => {
           })
           .catch((error) => {
             console.log(error);
-          });
-        axios
-          .get(`http://localhost:500/controle/desbloqueio`)
-          .then((response) => {
-            res.status(200).send(response.data);
           });
       } else {
         res.status(400).send(`Patinete ${data.serial} não está alugado`);

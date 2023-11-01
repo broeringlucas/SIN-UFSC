@@ -73,7 +73,7 @@ app.get(`/pagamento/cartao`, (req, res) => {
 
 app.get("/pagamento/cartao/:numeroCartao", (req, res) => {
   const query = `SELECT * FROM registroCartao WHERE numeroCartao = ?`;
-  const params = [req.params.numCartao];
+  const params = [req.params.numeroCartao];
   db.get(query, params, (err, result) => {
     if (err) {
       console.log(err.message);
@@ -110,11 +110,23 @@ app.delete("/pagamento/cartao/:numeroCartao", (req, res) => {
   });
 });
 
-app.post("/pagamento/pagamento/:numeroCartao", (req, res) => {
-  const { cpf, valor } = req.body;
-  const query = `INSERT INTO registroPagamento (cpf, numeroCartao, valor, data) VALUES (?, ?, ?, ?)`;
+app.get("/pagamento/pagamento", (req, res) => {
+  const query = `SELECT * FROM registroPagamento`;
+  db.all(query, (err, result) => {
+    if (err) {
+      console.log(err.message);
+      res.status(500).send(err.message);
+    } else {
+      res.status(200).json(result);
+    }
+  });
+});
+
+app.post("/pagamento/pagamento/", (req, res) => {
+  const { numeroCartao, valor } = req.body;
+  const query = `INSERT INTO registroPagamento (numeroCartao, valor, data) VALUES (?, ?, ?)`;
   const data = moment().format("YYYY-MM-DD HH:mm:ss");
-  const params = [cpf, req.params.numeroCartao, valor, data];
+  const params = [numeroCartao, valor, data];
   db.run(query, params, (err) => {
     if (err) {
       console.log(err.message);
@@ -123,4 +135,9 @@ app.post("/pagamento/pagamento/:numeroCartao", (req, res) => {
       res.status(200).send("Pagamento realizado com sucesso!");
     }
   });
+});
+
+const port = 5000;
+app.listen(port, () => {
+  console.log(`Servidor rodando na porta ${port}`);
 });

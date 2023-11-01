@@ -14,6 +14,8 @@ function selectProxyHost(req) {
     return "http://localhost:80";
   } else if (req.path.startsWith("/controle")) {
     return "http://localhost:500";
+  } else if (req.path.startsWith("/pagamento")) {
+    return "http://localhost:5000";
   } else return null;
 }
 
