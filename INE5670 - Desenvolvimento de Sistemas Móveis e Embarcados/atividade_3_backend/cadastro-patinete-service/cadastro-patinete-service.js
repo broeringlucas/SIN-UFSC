@@ -15,7 +15,7 @@ const db = new sqlite3.Database("database.db", (err) => {
     db.run(
       `CREATE TABLE IF NOT EXISTS patinetes (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            serial INTEGER NOT NULL,
+            serial INTEGER NOT NULL UNIQUE,
             status TEXT NOT NULL,
             latitude REAL NOT NULL,
             longitude REAL NOT NULL
@@ -32,7 +32,8 @@ const db = new sqlite3.Database("database.db", (err) => {
 });
 
 app.post(`/patinetes`, (req, res) => {
-  const { serial, status, latitude, longitude } = req.body;
+  const { serial, latitude, longitude } = req.body;
+  const status = "disponível";
   const query = `INSERT INTO patinetes (serial, status, latitude, longitude) VALUES (?, ?, ?, ?)`;
   const params = [serial, status, latitude, longitude];
   db.run(query, params, (err) => {
@@ -151,7 +152,7 @@ app.put("/patinetes/:serial", (req, res) => {
       console.log(err.message);
       res.status(500).send(err.message);
     } else {
-      res.status(200).send("Patinete atualizado com sucesso!");
+      res.status(200).send("Status atualizado com sucesso!");
     }
   });
 });

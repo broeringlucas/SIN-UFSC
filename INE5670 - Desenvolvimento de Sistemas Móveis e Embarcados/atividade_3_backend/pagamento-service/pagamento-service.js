@@ -15,9 +15,9 @@ const db = new sqlite3.Database("database.db", (err) => {
     db.run(
       `CREATE TABLE IF NOT EXISTS registroCartao (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                cpf INTEGER NOT NULL UNIQUE,
+                cpf VARCHAR(11) NOT NULL UNIQUE,
                 nome serial INTEGER NOT NULL,
-                numeroCartao INTEGER NOT NULL UNIQUE
+                numeroCartao VARCHAR NOT NULL UNIQUE
             );`,
       (err) => {
         if (err) {
@@ -30,8 +30,10 @@ const db = new sqlite3.Database("database.db", (err) => {
     db.run(
       `CREATE TABLE IF NOT EXISTS registroPagamento (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    numeroCartao valor INTEGER NOT NULL UNIQUE,
-                    valor REAL NOT NULL UNIQUE,
+                    numeroCartao valor VARCHAR NOT NULL,
+                    serialPatinete INTEGER NOT NULL,
+                    status VARCHAR NOT NULL,
+                    valor REAL,
                     data TEXT NOT NULL
                 );`,
       (err) => {
@@ -122,11 +124,44 @@ app.get("/pagamento/pagamento", (req, res) => {
   });
 });
 
-app.post("/pagamento/pagamento/", (req, res) => {
-  const { numeroCartao, valor } = req.body;
-  const query = `INSERT INTO registroPagamento (numeroCartao, valor, data) VALUES (?, ?, ?)`;
+app.get("/pagamento/pagamento/:numeroCartao,:serialPatinete", (req, res) => {
+  const query = `SELECT * FROM registroPagamento WHERE numeroCartao = ? AND serialPatinete = ? AND status = "Pendente"`;
+  const params = [req.params.numeroCartao, req.params.serialPatinete];
+  db.get(query, params, (err, result) => {
+    if (err) {
+      console.log(err.message);
+      res.status(500).send(err.message);
+    } else {
+      res.status(200).json(result);
+    }
+  });
+});
+
+app.post("/pagamento/pagamento/inicio", (req, res) => {
+  const { numeroCartao, serialPatinete } = req.body;
+  const query = `INSERT INTO registroPagamento (numeroCartao, serialPatinete, data, status) VALUES (?, ?, ?, ?)`;
   const data = moment().format("YYYY-MM-DD HH:mm:ss");
-  const params = [numeroCartao, valor, data];
+  const status = "Pendente";
+  const params = [numeroCartao, serialPatinete, data, status];
+  db.run(query, params, (err) => {
+    if (err) {
+      console.log(err.message);
+      res.status(500).send(err.message);
+    } else {
+      res.status(200).send("Pagamento inciado!");
+    }
+  });
+});
+
+app.patch("/pagamento/pagamento/final", (req, res) => {
+  const query = `UPDATE registroPagamento SET status = COALESCE(?,status), valor = COALESCE(?,valor) WHERE numeroCartao = ? AND serialPatinete = ? AND status = "Pendente"`;
+  const status = "finalizado";
+  const params = [
+    status,
+    req.body.valor,
+    req.body.numeroCartao,
+    req.body.serialPatinete,
+  ];
   db.run(query, params, (err) => {
     if (err) {
       console.log(err.message);

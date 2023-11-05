@@ -57,17 +57,17 @@ app.get(`/alugueis/:id`, (req, res) => {
   });
 });
 
-app.post(`/alugueis/alugar/:serialPatinete`, (req, res) => {
+app.post(`/alugueis/alugar/:serialPatinete,:numeroCartao`, (req, res) => {
   axios
     .get(`http://localhost:8090/patinetes/${req.params.serialPatinete}`)
     .then((response) => {
       const { data } = response;
-      console.log(data);
-      if (data.status == "disponível") {
+
+      if (!data) {
+        res.send("Patinete não encontrado!");
+      } else if (data.status == "disponível") {
         const startTime = new Date();
         const formattedStartTime = startTime.toLocaleString();
-        console.log(formattedStartTime.get);
-        console.log(formattedStartTime);
         const query = `INSERT INTO alugueis (serialPatinete, inicio) VALUES (?, ?)`;
         const params = [req.params.serialPatinete, formattedStartTime];
         db.run(query, params, (err) => {
@@ -76,24 +76,52 @@ app.post(`/alugueis/alugar/:serialPatinete`, (req, res) => {
             res.status(500).send(err.message);
           } else {
             axios
-              .get(`http://localhost:500/controle/bloqueio`)
+              .get(
+                `http://localhost:5000/pagamento/cartao/${req.params.numeroCartao}`
+              )
               .then((response) => {
-                res.status(200).send(response.data);
+                const cartaoData = response.data;
+
+                if (!cartaoData) {
+                  res.status(400).send("Cartão não encontrado!");
+                } else {
+                  axios
+                    .get(`http://localhost:500/controle/bloqueio`)
+                    .then((response) => {
+                      res.status(200).send(response.data);
+                    })
+                    .catch((error) => {
+                      console.log(error);
+                    });
+                  axios
+                    .put(
+                      `http://localhost:8090/patinetes/${req.params.serialPatinete}`,
+                      {
+                        status: "alugado",
+                      }
+                    )
+                    .then((response) => {
+                      console.log(response.data);
+                    })
+                    .catch((error) => {
+                      console.log(error);
+                    });
+                  console.log("Patinete alugado!");
+                  axios
+                    .post(`http://localhost:5000/pagamento/pagamento/inicio`, {
+                      numeroCartao: req.params.numeroCartao,
+                      serialPatinete: req.params.serialPatinete,
+                    })
+                    .then((response) => {
+                      console.log(response.data);
+                    })
+                    .catch((error) => {
+                      console.log(error);
+                    });
+                }
               });
-            // res.status(200).send("Patinete alugado!");
-            console.log("Patinete alugado!");
           }
         });
-        axios
-          .put(`http://localhost:8090/patinetes/${req.params.serialPatinete}`, {
-            status: "alugado",
-          })
-          .then((response) => {
-            console.log(response.data);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
       } else {
         res.status(400).send(`Patinete ${data.serial} não está disponível`);
       }
@@ -105,8 +133,10 @@ app.post(`/alugueis/devolver/:serialPatinete,:numeroCartao`, (req, res) => {
     .get(`http://localhost:8090/patinetes/${req.params.serialPatinete}`)
     .then((response) => {
       const { data } = response;
-      console.log(data);
-      if (data.status == "alugado") {
+
+      if (!data) {
+        res.send("Patinete não encontrado!");
+      } else if (data.status == "alugado") {
         const endTime = new Date();
         const formattedEndTime = endTime.toLocaleString();
         const query = `UPDATE alugueis SET fim = ? WHERE serialPatinete = ? AND fim IS NULL`;
@@ -118,41 +148,82 @@ app.post(`/alugueis/devolver/:serialPatinete,:numeroCartao`, (req, res) => {
             res.status(500).send(err.message);
           } else {
             axios
-              .get(`http://localhost:500/controle/desbloqueio`)
+              .get(
+                `http://localhost:5000/pagamento/cartao/${req.params.numeroCartao}`
+              )
               .then((response) => {
-                res.status(200).send(response.data);
+                const cartaoData = response.data;
+                console.log(req.params.numeroCartao);
+                console.log(req.params.serialPatinete);
+
+                if (!cartaoData) {
+                  res.status(400).send("Cartão não encontrado!");
+                } else {
+                  axios
+                    .get(
+                      `http://localhost:5000/pagamento/pagamento/${req.params.numeroCartao},${req.params.serialPatinete}`
+                    )
+                    .then((response) => {
+                      console.log(response.data);
+                      const pagamentoPatinete = response.data.serialPatinete;
+
+                      if (pagamentoPatinete != req.params.serialPatinete) {
+                        res
+                          .status(400)
+                          .send("Patinente não alugado com esse cartão!");
+                      } else {
+                        axios
+                          .get(`http://localhost:500/controle/desbloqueio`)
+                          .then((response) => {
+                            res.status(200).send(response.data);
+                          });
+                        // res.status(200).send("Patinete devolvido!");
+                        console.log("Patinete devolvido!");
+                        axios
+                          .put(
+                            `http://localhost:8090/patinetes/${req.params.serialPatinete}`,
+                            {
+                              status: "disponível",
+                            }
+                          )
+                          .then((response) => {
+                            console.log(response.data);
+                          })
+                          .catch((error) => {
+                            console.log(error);
+                          });
+
+                        db.get(
+                          getStartTime,
+                          [req.params.serialPatinete, formattedEndTime],
+                          (err, result) => {
+                            const startTime2 = new Date(result.inicio);
+                            const endTime2 = new Date(formattedEndTime);
+                            const diff = endTime2 - startTime2;
+                            const diffMinutes = diff / 60000;
+
+                            const valor = (diffMinutes * 0.5).toFixed(2);
+
+                            axios
+                              .patch(
+                                `http://localhost:5000/pagamento/pagamento/final`,
+                                {
+                                  numeroCartao: req.params.numeroCartao,
+                                  serialPatinete: req.params.serialPatinete,
+                                  valor: valor,
+                                }
+                              )
+                              .catch((error) => {
+                                console.log(error);
+                              });
+                          }
+                        );
+                      }
+                    });
+                }
               });
-            db.get(
-              getStartTime,
-              [req.params.serialPatinete, formattedEndTime],
-              (err, result) => {
-                const startTime2 = new Date(result.inicio);
-                const endTime2 = new Date(formattedEndTime);
-                const diff = endTime2 - startTime2;
-                const diffMinutes = diff / 60000;
-
-                valor = diffMinutes * 0.5;
-
-                axios.post(`http://localhost:5000/pagamento/pagamento/`, {
-                  numeroCartao: req.params.numeroCartao,
-                  valor: valor,
-                });
-              }
-            );
-            // res.status(200).send("Patinete devolvido!");
-            console.log("Patinete devolvido!");
           }
         });
-        axios
-          .put(`http://localhost:8090/patinetes/${req.params.serialPatinete}`, {
-            status: "disponível",
-          })
-          .then((response) => {
-            console.log(response.data);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
       } else {
         res.status(400).send(`Patinete ${data.serial} não está alugado`);
       }
