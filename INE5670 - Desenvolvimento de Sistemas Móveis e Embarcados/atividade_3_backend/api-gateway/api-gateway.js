@@ -11,9 +11,9 @@ function selectProxyHost(req) {
   } else if (req.path.startsWith("/patinetes")) {
     return "http://localhost:8090";
   } else if (req.path.startsWith("/alugueis")) {
-    return "http://localhost:80";
+    return "http://localhost:8070";
   } else if (req.path.startsWith("/controle")) {
-    return "http://localhost:500";
+    return "http://localhost:3030";
   } else if (req.path.startsWith("/pagamento")) {
     return "http://localhost:5000";
   } else return null;

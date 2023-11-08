@@ -15,7 +15,7 @@ app.get(`/controle/desbloqueio`, (req, res) => {
   console.log("Patinete Desbloqueado!");
 });
 
-port = 500;
+port = 3030;
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
 });

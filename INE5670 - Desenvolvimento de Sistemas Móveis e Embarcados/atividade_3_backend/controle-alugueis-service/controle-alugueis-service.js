@@ -86,7 +86,7 @@ app.post(`/alugueis/alugar/:serialPatinete,:numeroCartao`, (req, res) => {
                   res.status(400).send("Cartão não encontrado!");
                 } else {
                   axios
-                    .get(`http://localhost:500/controle/bloqueio`)
+                    .get(`http://localhost:3030/controle/bloqueio`)
                     .then((response) => {
                       res.status(200).send(response.data);
                     })
@@ -173,7 +173,7 @@ app.post(`/alugueis/devolver/:serialPatinete,:numeroCartao`, (req, res) => {
                           .send("Patinente não alugado com esse cartão!");
                       } else {
                         axios
-                          .get(`http://localhost:500/controle/desbloqueio`)
+                          .get(`http://localhost:3030/controle/desbloqueio`)
                           .then((response) => {
                             res.status(200).send(response.data);
                           });
@@ -230,7 +230,7 @@ app.post(`/alugueis/devolver/:serialPatinete,:numeroCartao`, (req, res) => {
     });
 });
 
-port = 80;
+port = 8070;
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
 });

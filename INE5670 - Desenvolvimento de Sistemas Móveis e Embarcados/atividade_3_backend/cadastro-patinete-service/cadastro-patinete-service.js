@@ -134,7 +134,7 @@ app.get("/patinetes/proximos/:lat,:long", (req, res) => {
 
       for (const row of rows) {
         const distancia = haversine(lat, long, row.latitude, row.longitude);
-        if (distancia <= raioKm && row.status === "disponivel") {
+        if (distancia <= raioKm && row.status === "disponível") {
           patinetesProximos.push(row);
         }
       }
