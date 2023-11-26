@@ -5,8 +5,9 @@ from Algorithms.LRU import LRU
 from Algorithms.NRU import NRU
 from Algorithms.SegundaChanceEhRelogio import SegundaChanceEhRelogio
 
-frames = 64
-pages = json.load(open('Accesses/pages100000.json'))
+frames = 5
+# pages = json.load(open('Accesses/pages100000.json'))
+pages = [1, 2, 3, 4, 2, 1, 5, 6, 2, 1, 2, 3, 7, 6, 3, 2, 1, 2, 3, 6]
 totalPages = 256
 accessTohReset = 1000
 accesses = len(pages)
