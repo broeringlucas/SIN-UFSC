@@ -28,11 +28,11 @@ const db = new sqlite3.Database("./database.db", (err) => {
   }
 });
 
-app.post(`/log/:temp`, (req, res) => {
+app.post(`/logs/`, (req, res) => {
   const { temp } = req.body;
   const query = `INSERT INTO logs (temp, date) VALUES (?, ?)`;
   const date = new Date();
-  const formateedDate = date.toISOString();
+  const formateedDate = date.toLocaleString();
   const params = [temp, formateedDate];
   db.run(query, params, (err) => {
     if (err) {
@@ -44,9 +44,21 @@ app.post(`/log/:temp`, (req, res) => {
   });
 });
 
-app.get(`/log`, (req, res) => {
+app.get(`/logs`, (req, res) => {
   const query = `SELECT * FROM logs ORDER BY id DESC LIMIT 1`;
   db.get(query, (err, result) => {
+    if (err) {
+      console.log(err.message);
+      res.status(500).send(err.message);
+    } else {
+      res.status(200).json(result);
+    }
+  });
+});
+
+app.get(`/logs/all`, (req, res) => {
+  const query = `SELECT * FROM logs`;
+  db.all(query, (err, result) => {
     if (err) {
       console.log(err.message);
       res.status(500).send(err.message);

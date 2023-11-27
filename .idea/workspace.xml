@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bff97aae-2c18-440c-9eec-1a6b08202943" name="Changes" comment="" />
+    <list default="true" id="bff97aae-2c18-440c-9eec-1a6b08202943" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/INE5670 - Desenvolvimento de Sistemas Móveis e Embarcados/trabalho_final/backend/api-gateway/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/INE5670 - Desenvolvimento de Sistemas Móveis e Embarcados/trabalho_final/backend/api-gateway/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/INE5670 - Desenvolvimento de Sistemas Móveis e Embarcados/trabalho_final/backend/control-service/control-service.js" beforeDir="false" afterPath="$PROJECT_DIR$/INE5670 - Desenvolvimento de Sistemas Móveis e Embarcados/trabalho_final/backend/control-service/control-service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/INE5670 - Desenvolvimento de Sistemas Móveis e Embarcados/trabalho_final/backend/control-service/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/INE5670 - Desenvolvimento de Sistemas Móveis e Embarcados/trabalho_final/backend/control-service/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/INE5670 - Desenvolvimento de Sistemas Móveis e Embarcados/trabalho_final/backend/logging-service/logging-service.js" beforeDir="false" afterPath="$PROJECT_DIR$/INE5670 - Desenvolvimento de Sistemas Móveis e Embarcados/trabalho_final/backend/logging-service/logging-service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/INE5670 - Desenvolvimento de Sistemas Móveis e Embarcados/trabalho_final/backend/logging-service/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/INE5670 - Desenvolvimento de Sistemas Móveis e Embarcados/trabalho_final/backend/logging-service/package-lock.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 6
-}]]></component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="2YjQt9eHUFw9jj4ySZFyDDHsvwj" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -18,7 +27,9 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true"
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/Lucas/Desktop/dev-spring-boot"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
