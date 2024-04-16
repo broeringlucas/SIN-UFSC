@@ -8,3 +8,6 @@ main = do
     let x = (read xStr :: Float)
     let y = (read yStr :: Float)
     print (potencia x y)
+
+
+
