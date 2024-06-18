@@ -1,168 +1,124 @@
-object KojunSolver extends App {
+package Kojun
 
-  // Definição de tipos
-  type Valor = Int
-  type Linha[A] = List[A]
-  type Matriz[A] = List[Linha[A]]
-  type Tabuleiro = Matriz[Valor]
-  type Escolhas = List[Valor]
+// baixar o compilador de scala
+// entrar na pasta do t2.scala e rodar sbt 
+// depois rodar run
 
-  // Retorno de informações da matriz
-  def linhas[A](matriz: Matriz[A]): List[Linha[A]] = matriz
-  def colunas[A](matriz: Matriz[A]): List[Linha[A]] = matriz.transpose
-  def dimensao[A](matriz: Matriz[A]): Int = matriz.headOption.map(_.length).getOrElse(0)
+object KojunSolucionar extends App {
 
-  // Função grupoFiltro
-  def grupoFiltro[A](grupo: A, list: List[(A, A)]): Linha[A] =
-    list.collect { case (valor, `grupo`) => valor }
+  // Function to validate a move at a given position
+  def movimentoValido(grid: Array[Array[Int]], regioes: Array[Array[Int]], linha: Int, col: Int, k: Int): Boolean = {
+    val regiao = regioes(linha)(col)
+    val regiaoValida = valoresRegiao(grid, regioes, regiao)
+    val validarVizinhos = valoresVizinhos(grid, linha, col)
+    val validaAcima = acimaValido(grid, regioes, linha, col, k)
+    val validaAbaixo = abaixoValido(grid, regioes, linha, col, k)
+    val menorQueRegiao = k <= regiaoValida.length
 
-  // Correção na função gruposMatriz
-  def gruposMatriz(valores: Matriz[Valor], grupos: Tabuleiro): List[Linha[Valor]] = {
-    val valoresTupla: List[(Valor, Valor)] = valores.flatten.zip(grupos.flatten)
-    val gruposMapa: List[Valor] = valoresTupla.map(_._2).distinct
-
-    gruposMapa.map(grupo => grupoFiltro(grupo, valoresTupla))
+    !regiaoValida.contains(k) && !validarVizinhos.contains(k) && validaAcima && validaAbaixo && menorQueRegiao
   }
 
-  // Obtém o tamanho de um grupo pela quantidade de elementos em um grupo
-  def tamanhoGrupo[A](id: A, grupos: Matriz[A]): Int =
-    grupos.flatten.count(_ == id)
+  // Function to check if the upper neighbor is valid
+  def acimaValido(grid: Array[Array[Int]], regioes: Array[Array[Int]], linha: Int, col: Int, k: Int): Boolean = {
+    linha == (grid.length - 1) || regioes(linha + 1)(col) != regioes(linha)(col) || grid(linha + 1)(col) < k
+  }
 
-  // Obtém a lista de valores de um grupo
-  def valorGrupo[A](valores: Matriz[A], grupos: Tabuleiro, id: Int): Linha[A] =
-    (valores, grupos).zipped.flatMap((linha, grupo) => linha.zip(grupo)).collect {
-      case (valor, `id`) => valor
-    }
+    // Function to get values in the same region
+  def valoresRegiao(grid: Array[Array[Int]], regioes: Array[Array[Int]], regiao: Int): List[Int] = {
+    (for {
+      i <- grid.indices
+      j <- grid(i).indices
+      if regioes(i)(j) == regiao
+    } yield grid(i)(j)).toList
+  }
 
-   // Correção na função grupoColunas
-  def grupoColunas(valores: Matriz[Valor], grupos: Tabuleiro): List[Linha[Valor]] =
-    colunas(valores).zip(colunas(grupos)).flatMap {
-      case (valoresColuna, gruposColuna) => grupoFiltro(gruposColuna.head, valoresColuna)
-    }
+  // Function to get values of neighboring cells
+  def valoresVizinhos(grid: Array[Array[Int]], linha: Int, col: Int): List[Int] = {
+    val vizinhos = List(
+      (linha + 1, col),
+      (linha - 1, col),
+      (linha, col + 1),
+      (linha, col - 1)
+    )
 
-  // Função singles
-  def singles[A](xss: List[Linha[A]]): Linha[A] =
-    xss.flatten.distinct
+    vizinhos.filter { case (i, j) =>
+      i >= 0 && i < grid.length && j >= 0 && j < grid(i).length
+    }.map { case (i, j) => grid(i)(j) }
+  }
 
-  // Forma as colunas de origem de acordo com as divididas por blocos
-  def origemColunas[A](bs: List[Linha[A]], n: Int): List[Linha[A]] =
-    dividirLista(n, bs.flatten)
+  // Function to check if the lower neighbor is valid
+  def abaixoValido(grid: Array[Array[Int]], regioes: Array[Array[Int]], linha: Int, col: Int, k: Int): Boolean = {
+    linha == 0 || regioes(linha - 1)(col) != regioes(linha)(col) || grid(linha - 1)(col) > k
+  }
 
-  // Divide uma lista em outras pequenas listas
-  def dividirLista[A](n: Int, lista: List[A]): List[List[A]] =
-    lista.grouped(n).takeWhile(_.nonEmpty).toList
-
-  // Kojun
-
-  // Adquire a primeira solução para o tabuleiro
-  def solucao(valores: Tabuleiro, grupos: Tabuleiro): Tabuleiro =
-    buscaSolucao(reduzirEscolhas(escolhas(valores, grupos), grupos), grupos).head
-
-  // Define as escolhas possíveis para cada espaço no tabuleiro
-  def escolhas(valores: Tabuleiro, grupos: Tabuleiro): Matriz[Escolhas] =
-    valores.zip(grupos).map { case (linhaValores, linhaGrupos) =>
-      linhaValores.zip(linhaGrupos).map { case (v, p) =>
-        if (v == 0) (1 to tamanhoGrupo(p, grupos)).filterNot(valorGrupo(valores, grupos, p).contains)
-        else List(v)
+    // Function to try placing values at a cell
+  def tentarPosicionar(grid: Array[Array[Int]], regioes: Array[Array[Int]], linha: Int, col: Int, ks: List[Int]): Option[Array[Array[Int]]] = {
+    val novoGrid = grid.map(_.clone) // Create a new copy of the grid
+    if (ks.isEmpty) None // Base case: no more values to try, return None
+    else {
+      if (movimentoValido(grid, regioes, linha, col, ks.head)) { // Check if placing the value is valid
+        novoGrid(linha)(col) = ks.head // Place the value
+        solucionar(novoGrid, regioes, linha, col + 1) match { // Recur for next cell
+          case Some(solution) => Some(solution) // If solution found, return it
+          case None => tentarPosicionar(grid, regioes, linha, col, ks.tail) // Otherwise, try next value
+        }
+      } else {
+        tentarPosicionar(grid, regioes, linha, col, ks.tail) // If move not valid, try next value
       }
     }
-
-  // Define o valor para um espaço onde há somente uma solução possível
-  def reduzirEscolhasLista(xss: Linha[Escolhas]): Linha[Escolhas] =
-    xss.map(xs => if (elementoUnico(xs)) xs else xs.diff(singles(xss)))
-
-  // Com as colunas divididas em grupos, reduz o número de escolhas dentro de cada lista
-  def reduzirEscolhas(valores: Matriz[Escolhas], grupos: Tabuleiro): Matriz[Escolhas] =
-    colunas(origemColunas(grupoColunas(valores, grupos).map(reduzirEscolhasLista), dimensao(valores)))
-
-  // Verifica se não há mais de um elemento em uma lista
-  def elementoUnico[A](xs: Linha[A]): Boolean = xs.length == 1
-
-  // Subtrai os elementos de uma lista por outra lista
-  def minus(xs: Escolhas, ys: Escolhas): Escolhas =
-    if (elementoUnico(xs)) xs else xs.diff(ys)
-
-  // Faz a busca de todas as soluções possíveis por casa, informando se o tabuleiro possui soluções ou não e se é necessário expandir a busca
-  def buscaSolucao(valores: Matriz[Escolhas], grupos: Tabuleiro): List[Tabuleiro] =
-    if (semSolucao(valores, grupos)) Nil
-    else if (valores.flatten.forall(elementoUnico)) List(valores.flatten)
-    else expandirBusca(valores).flatMap(solucao(valores12x12, grupos12x12).map(_.mkString(" ")))
-
-  // Define se é impossível uma solução para o tabuleiro
-  def semSolucao(valores: Matriz[Escolhas], grupos: Tabuleiro): Boolean =
-    nula(valores) || !valida(valores, grupos)
-
-  // Verifica se há casas vazias na matriz do tabuleiro
-  def nula[A](matriz: Matriz[A]): Boolean =
-    matriz.flatten.contains(null)
-
-  // Define se a matriz é válida
-  def valida(valores: Matriz[Escolhas], grupos: Tabuleiro): Boolean =
-    colunas(valores).forall(adjacenteValido) &&
-      linhas(valores).forall(adjacenteValido) &&
-      gruposMatriz(valores, grupos).forall(linhaValida) &&
-      grupoColunas(valores, grupos).forall(linhaDecrescente)
-
-  // Verifica se casas adjacentes não possuem o mesmo valor
-  def adjacenteValido[A](linha: Linha[Escolhas]): Boolean = linha.sliding(2).forall {
-    case List(a, b) => !(elementoUnico(a) && elementoUnico(b) && a.head == b.head)
-    case _ => true
+  }
+  
+  // Main solving function
+  def solucionar(grid: Array[Array[Int]], regioes: Array[Array[Int]], linha: Int, col: Int): Option[Array[Array[Int]]] = {
+    if (linha == grid.length) Some(grid) // Base case: if reached end of linhas, solution found
+    else if (col == grid(linha).length) solucionar(grid, regioes, linha + 1, 0) // Move to next linha
+    else if (grid(linha)(col) != 0) solucionar(grid, regioes, linha, col + 1) // Cell already filled, move to next cell
+    else {
+      val kValues = (1 to grid.length).toList // List of possible values to try
+      tentarPosicionar(grid, regioes, linha, col, kValues) // Try placing values at current cell
+    }
   }
 
-  // Verifica se não há valores repetidos em uma linha
-  def linhaValida[A](linha: Linha[Escolhas]): Boolean =
-    linha.flatten.groupBy(identity).values.forall(_.size == 1)
 
-  // Verifica se a linha está em ordem decrescente
-  def linhaDecrescente[A](linha: Linha[Escolhas]): Boolean =
-    linha.flatten.sliding(2).forall {
-      case List(a, b) => !(elementoUnico(a) && elementoUnico(b) && a.head < b.head)
-      case _ => true
-    }
-
-  // Expande as escolhas para as casas do tabuleiro
-  def expandirBusca[A](matriz: Matriz[Escolhas]): List[Matriz[Escolhas]] =
-    matriz.foldRight(List(List.empty[Escolhas])) {
-      case (linha, acumulado) =>
-        for {
-          valoresAnteriores <- acumulado
-          c <- linha
-        } yield valoresAnteriores :+ c
-    }
-
-  // Tabuleiros:
-
-  // Tabuleiro 12x12
-  val valores12x12: Tabuleiro = List(
-    List(2, 0, 6, 3, 5, 4, 0, 0, 3, 0, 0, 2),
-    List(0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0),
-    List(0, 1, 0, 4, 2, 3, 0, 4, 0, 0, 1, 0),
-    List(0, 0, 6, 0, 7, 0, 7, 0, 2, 7, 0, 0),
-    List(0, 2, 0, 0, 0, 2, 5, 4, 0, 0, 0, 0),
-    List(0, 0, 0, 0, 3, 0, 0, 1, 3, 0, 0, 0),
-    List(4, 2, 0, 6, 5, 0, 5, 0, 0, 2, 0, 0),
-    List(7, 6, 0, 4, 0, 2, 0, 3, 7, 6, 5, 0),
-    List(0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0),
-    List(0, 0, 0, 7, 4, 3, 0, 6, 0, 0, 3, 0),
-    List(0, 0, 3, 0, 0, 5, 0, 0, 0, 0, 0, 0),
-    List(0, 0, 0, 2, 4, 0, 1, 0, 0, 4, 1, 0)
-  )
-  val grupos12x12: Tabuleiro = List(
-    List(0, 0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3),
-    List(0, 0, 0, 1, 1, 4, 5, 5, 6, 7, 7, 8),
-    List(9, 9, 9, 10, 1, 5, 5, 5, 6, 7, 7, 8),
-    List(9, 11, 10, 10, 10, 10, 12, 13, 13, 14, 14, 8),
-    List(9, 11, 15, 10, 16, 16, 12, 12, 12, 17, 14, 8),
-    List(11, 11, 18, 10, 16, 16, 12, 12, 12, 17, 14, 19),
-    List(11, 18, 18, 18, 20, 20, 21, 21, 14, 14, 14, 19),
-    List(22, 22, 22, 18, 20, 20, 21, 21, 21, 21, 23, 23),
-    List(22, 22, 22, 18, 20, 24, 25, 25, 25, 21, 23, 23),
-    List(26, 27, 22, 24, 24, 24, 24, 24, 25, 25, 23, 28),
-    List(26, 26, 29, 29, 29, 29, 29, 24, 30, 31, 31, 28),
-    List(26, 32, 32, 33, 33, 33, 33, 30, 30, 30, 31, 31)
+  // Grid represeting values
+  val valores10x10 = Array(
+    Array(4,0,7,0,4,6,3,0,2,3),
+    Array(0,0,0,1,0,4,0,2,0,2),
+    Array(2,0,0,4,0,0,7,0,0,4),
+    Array(0,6,0,0,0,6,0,4,0,3),
+    Array(5,0,5,0,4,0,6,0,0,1),
+    Array(4,1,0,3,0,4,2,0,0,0),
+    Array(0,0,1,0,0,7,0,3,0,7),
+    Array(5,3,0,5,6,0,5,0,6,3),
+    Array(3,0,4,0,0,0,0,0,0,0),
+    Array(1,0,6,4,3,0,2,0,4,0)
   )
 
-  // Imprime a resolução do tabuleiro
-  println("Resolução do tabuleiro:")
-  solucaoFinal.foreach(println)
+  // Grid representing regions
+  val regioes10x10 = Array(
+    Array(1,1,2,2,2,2,2,3,3,3),
+    Array(1,1,4,2,2,5,5,5,6,6),
+    Array(7,7,4,8,8,5,9,9,9,10),
+    Array(7,12,12,13,8,8,8,9,11,10),
+    Array(12,12,13,13,13,8,9,9,10,10),
+    Array(12,12,13,14,14,14,9,15,15,15),
+    Array(16,16,14,14,14,17,17,17,15,18),
+    Array(19,16,20,20,20,17,17,17,18,18),
+    Array(19,16,16,20,20,21,17,22,18,18),
+    Array(19,19,19,19,20,21,21,22,18,18),
+  )
+
+  // Function to print the grid
+  def printGrid(grid: Array[Array[Int]]): Unit = {
+    grid.foreach(linha => println(linha.mkString(" ")))
+  }
+
+  // Try to solve the grid and print the solution or a message if no solution found
+  solucionar(valores10x10, regioes10x10, 0, 0) match {
+    case Some(gridSolucionado) =>
+      println("Solution found:")
+      printGrid(gridSolucionado) // Print the solucionard grid
+    case None =>
+      println("No solution found.") // No solution found
+  }
 }
