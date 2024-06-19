@@ -140,3 +140,19 @@ SLF4J(I): Actual provider is of type [scribe.slf4j.ScribeServiceProvider@40661b3
 2024.06.18 18:22:24 INFO  Shutting down server
 2024.06.18 18:22:24 INFO  shutting down Metals
 2024.06.18 18:22:24 INFO  Exiting server
+2024.06.18 22:46:46 INFO  Started: Metals version 1.3.1 in folders 'C:\Users\Lucas\Desktop\github\SIN-UFSC' for client Visual Studio Code 1.90.1.
+SLF4J(W): Class path contains multiple SLF4J providers.
+SLF4J(W): Found provider [scribe.slf4j.ScribeServiceProvider@ca0307e]
+SLF4J(W): Found provider [ch.qos.logback.classic.spi.LogbackServiceProvider@274ea4f4]
+SLF4J(W): See https://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J(I): Actual provider is of type [scribe.slf4j.ScribeServiceProvider@ca0307e]
+2024.06.18 22:46:47 WARN  Flyway upgrade recommended: H2 2.2.224 is newer than this version of Flyway and support has not been tested. The latest supported version of H2 is 2.2.220.
+2024.06.18 22:46:47 WARN  no build tool detected in workspace 'C:\Users\Lucas\Desktop\github\SIN-UFSC'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+2024.06.18 22:46:47 WARN  Build server is not auto-connectable.
+Jun 18, 2024 11:32:23 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+Jun 18, 2024 11:37:32 PM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTrace
+2024.06.19 00:25:26 INFO  Shutting down server
+2024.06.19 00:25:26 INFO  shutting down Metals
+2024.06.19 00:25:26 INFO  Exiting server
