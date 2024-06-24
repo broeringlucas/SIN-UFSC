@@ -1,0 +1,32 @@
+{
+  "balanceador_de_carga": { "host": "localhost", "port": 2000 },
+  "clientes": [
+    {
+      "id": 1,
+      "requests": [
+        { "type": "read", "key": "1" },
+        { "type": "write", "key": "1", "value": "gato" },
+        { "type": "read", "key": "2" },
+        { "type": "read", "key": "3" }
+      ]
+    },
+    {
+      "id": 2,
+      "requests": [
+        { "type": "read", "key": "2" },
+        { "type": "write", "key": "2", "value": "cachorro" },
+        { "type": "write", "key": "3", "value": "peixe" },
+        { "type": "read", "key": "1" }
+      ]
+    },
+    {
+      "id": 3,
+      "requests": [
+        { "type": "read", "key": "1" },
+        { "type": "write", "key": "2", "value": "boi" },
+        { "type": "write", "key": "3", "value": "baleia" },
+        { "type": "read", "key": "3" }
+      ]
+    }
+  ]
+}
