@@ -1,5 +1,5 @@
 /* swipl reuniao_de_condominio.pl */
-/* [t4]. */
+/* [reuniao_de_condominio]. */
 /* solucao(ListaSolucao). */
 
 %definição das opções 
@@ -69,7 +69,8 @@ todosDiferentes([H|T]) :- not(member(H,T)),
                           todosDiferentes(T).
 
 % X está em uma das pontas
-noCanto(X, Lista) :- nth0(0, Lista, X); last(Lista, X).
+noCanto(X, Lista) :- last(Lista, X).
+noCanto(X, [X | _]).
 
 
 solucao(ListaSolucao) :- 
