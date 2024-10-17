@@ -1,6 +1,6 @@
 # Parte 1 - Analisadores Léxicos
 
-## Estrutura de arquivos
+## Estrutura
 
 ```
 Parte 1 - Analisadores Léxicos/
@@ -18,7 +18,7 @@ Parte 1 - Analisadores Léxicos/
 
 ## Observaçöes
 
-Os outputs para a parte A e B são uma lista de tokens como abaixo além de uma mensagem de erro, apotando o char inválido e onde ocorreu.
+Os outputs para a parte A e B são uma lista de tokens como abaixo além de uma mensagem de erro, apontando o char inválido e onde ocorreu.
 
 [def, id, (, int, id, , , int, id, ), {, int, id, ..., return, ;, } ].
 
