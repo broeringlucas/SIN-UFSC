@@ -1,3 +1,5 @@
+# Aluno: Lucas Broering dos Santos
+
 from ply.lex import lex
 
 # Palavras reservadas
@@ -95,6 +97,7 @@ t_DIVISAO = r'/'
 t_RESTO = r'%'
 t_IGUAL_IGUAL = r'=='
 
+# Funções para os tokens especiais
 def t_ATRIBUICAO(t):
     r':=|='
     return t
@@ -123,10 +126,12 @@ def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
 
+# Tratamento de erros
 def t_error(t):
     print(f'Caractere inválido {t.value[0]!r} na linha {t.lineno}, posição {t.lexpos}.')
     t.lexer.skip(1)
 
+# Função para ler o arquivo de teste, pede um input do usuário
 def read_data():
     arquivo_test = input("Digite o caminho do arquivo de teste(com extensão): ")
     with open(arquivo_test, mode="r", encoding="utf-8") as file:

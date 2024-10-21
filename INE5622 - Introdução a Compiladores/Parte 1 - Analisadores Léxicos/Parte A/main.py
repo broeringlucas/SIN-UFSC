@@ -1,3 +1,5 @@
+# Aluno: Lucas Broering dos Santos
+
 from PartialLexer import PartialLexer
 
 # Aqui quando rodar vai pedir para digitar um caminho de arquivo, no diretorio tests tem 2 arquivos de test
