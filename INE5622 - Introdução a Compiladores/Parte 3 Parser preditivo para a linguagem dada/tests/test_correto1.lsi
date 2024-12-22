@@ -1,0 +1,31 @@
+def convertTemperature(int F) {
+    int C;
+    C := (F - 32) * 5 / 9;
+    print C;
+    return C;
+}
+
+def calcAverage(int a, int b, int c) {
+    int avg;
+    avg := (a + b + c) / 3;
+    print avg;
+    return avg;
+}
+
+def main() {
+    int F, temp1, temp2, temp3;
+    F := 100;
+    temp1 := 30;
+    temp2 := 40;
+    temp3 := 50;
+    converted_temperature := convertTemperature(F);
+    average:= calcAverage(temp1, temp2, temp3);
+}
+
+def func1(int A, int B) {
+    int C, D, R;
+    C := A <> B;
+    D := A + B * C;
+    R := C - D;
+    return R;
+}

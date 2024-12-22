@@ -1,0 +1,34 @@
+def calcPerimetro(int largura, int altura) {
+    int perimetro;
+    perimetro := 2 * (largura + altura);
+    print perimetro;
+    return perimetro;
+}
+
+def somaNumeros(int a, int b, int c, int d) {
+    int soma;
+    soma := a + b + c + d;
+    print soma;
+    return soma;
+}
+
+def main() {
+    int largura, altura, a, b, c, d;
+    largura := 5;
+    altura := 10;
+    a := 1;
+    b := 2;
+    c := 3;
+    d := 4;
+    perimetro := calcPerimetro(largura, altura);
+    soma := somaNumeros(a, b, c, d);
+}
+
+def principal() {
+    int X, Y, R;
+    X := 4;
+    Y := 5;
+    R := func1(X, Y);
+    print R;
+    return;
+}
