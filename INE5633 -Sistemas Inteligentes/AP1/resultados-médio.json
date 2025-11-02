@@ -1,0 +1,67 @@
+{
+  "UCS": {
+    "caminho": [
+      "down",
+      "left",
+      "down",
+      "right",
+      "right"
+    ],
+    "tamanho_caminho": 5,
+    "nodos_visitados": 41,
+    "tempo_execucao_s": 0.00063,
+    "maior_tamanho_fronteira": 36
+  },
+  "A*_admissivel_simples": {
+    "caminho": [
+      "down",
+      "left",
+      "down",
+      "right",
+      "right"
+    ],
+    "tamanho_caminho": 5,
+    "nodos_visitados": 6,
+    "tempo_execucao_s": 0.0,
+    "maior_tamanho_fronteira": 7
+  },
+  "A*_admissivel_avancada": {
+    "caminho": [
+      "down",
+      "left",
+      "down",
+      "right",
+      "right"
+    ],
+    "tamanho_caminho": 5,
+    "nodos_visitados": 6,
+    "tempo_execucao_s": 0.0,
+    "maior_tamanho_fronteira": 7
+  },
+  "A*_admissivel_avancada_2x": {
+    "caminho": [
+      "down",
+      "left",
+      "down",
+      "right",
+      "right"
+    ],
+    "tamanho_caminho": 5,
+    "nodos_visitados": 6,
+    "tempo_execucao_s": 0.00051,
+    "maior_tamanho_fronteira": 7
+  },
+  "A*_nao_admissivel": {
+    "caminho": [
+      "down",
+      "left",
+      "down",
+      "right",
+      "right"
+    ],
+    "tamanho_caminho": 5,
+    "nodos_visitados": 6,
+    "tempo_execucao_s": 0.0,
+    "maior_tamanho_fronteira": 7
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "UCS": {
+    "caminho": [
+      "down",
+      "right"
+    ],
+    "tamanho_caminho": 2,
+    "nodos_visitados": 9,
+    "tempo_execucao_s": 0.0,
+    "maior_tamanho_fronteira": 8
+  },
+  "A*_admissivel_simples": {
+    "caminho": [
+      "down",
+      "right"
+    ],
+    "tamanho_caminho": 2,
+    "nodos_visitados": 3,
+    "tempo_execucao_s": 0.0,
+    "maior_tamanho_fronteira": 5
+  },
+  "A*_admissivel_avancada": {
+    "caminho": [
+      "down",
+      "right"
+    ],
+    "tamanho_caminho": 2,
+    "nodos_visitados": 3,
+    "tempo_execucao_s": 0.00051,
+    "maior_tamanho_fronteira": 5
+  },
+  "A*_nao_admissivel": {
+    "caminho": [
+      "down",
+      "right"
+    ],
+    "tamanho_caminho": 2,
+    "nodos_visitados": 3,
+    "tempo_execucao_s": 0.0,
+    "maior_tamanho_fronteira": 5
+  }
+}
