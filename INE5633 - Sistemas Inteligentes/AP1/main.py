@@ -77,7 +77,7 @@ def main():
         else:
             results[name] = {"erro": "Nenhuma solução encontrada"}
 
-    with open(f"resultados-{level_name}.json", "w") as f:
+    with open(f"../resultados-{level_name}.json", "w") as f:
         json.dump(results, f, indent=2)
         
 if __name__ == "__main__":
