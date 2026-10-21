@@ -9,7 +9,7 @@
 
 | Atividade | O que a IA fez | O que a equipe fez ou decidiu |
 |---|---|---|
-| Refinamento da ideia | Sugerir ideias de sistema multiagente com o prompt feito pelo autor | Analisar as ideias geradas e refinar para o escopo do trabalho |
+| Refinamento da ideia | Refinar ideias de sistema multiagentes com o prompt feito pelo autor | Analisar o refinamento e ajustes |
 | Diagramas | Ajudou na diagramação | Revisão e ajustes |
 | Texto do relatório | Ajudou nos textos do relatório | Revisão do texto e ajustes |
 
