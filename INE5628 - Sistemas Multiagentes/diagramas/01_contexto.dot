@@ -1,0 +1,37 @@
+// MatriculaUFSC - Figura 1: contexto, fronteira e participantes
+// Renderizar: dot -Tpng -Gdpi=200 01_contexto.dot -o 01_contexto.png
+digraph contexto {
+  graph [rankdir=LR, fontname="Carlito", fontsize=12, nodesep=0.25, ranksep=0.55, pad=0.08, compound=true, newrank=true];
+  node  [shape=box, style="rounded,filled", fontname="Carlito", fontsize=11.5, color="#1f4e79", penwidth=1.2, margin="0.10,0.06"];
+  edge  [fontname="Carlito", fontsize=10, color="#44546a", arrowsize=0.7];
+
+  subgraph cluster_ext {
+    label="Fora da fronteira"; style="dashed,rounded"; color="#8c8c8c"; fontcolor="#595959";
+    ext [label="Pessoas e sistemas\nacadêmicos reais:\nnão integrados", fillcolor="#f2f2f2", color="#8c8c8c", fontcolor="#404040"];
+  }
+
+  subgraph cluster_sys {
+    label="Fronteira do MatriculaUFSC (dados sintéticos)"; style="rounded"; color="#1f4e79"; fontcolor="#1f4e79"; fontsize=12;
+
+    reg [label="Registrar /\nPolicyService\ndeterminístico", fillcolor="#dff0e3", color="#2e7d4f"];
+
+    subgraph cluster_ag {
+      label="Agentes: comunicação via MessageBus + TraceLogger";
+      style="rounded,dashed"; color="#7f9ec0"; fontcolor="#44546a"; fontsize=10.5;
+      coord   [label="DepartmentAgent ×D\ndeliberativo", fillcolor="#fdf1d6", color="#b7791f"];
+      student [label="StudentAgent ×N (BDI)\nvários cursos", fillcolor="#dbe8f6"];
+      prof    [label="ProfessorAgent ×M (BDI)", fillcolor="#dbe8f6"];
+      room    [label="ClassroomAgent ×R\nsalas compartilhadas\n(reativo com estado)", fillcolor="#fdf1d6", color="#b7791f"];
+    }
+
+    env [shape=ellipse, style="filled", label="Ambiente simulado\ncatálogo, turmas, salas,\nrelógio, eventos", fillcolor="#ffffff"];
+  }
+
+  ext -> reg [style=dashed, label="cenários e\nparâmetros"];
+  reg -> coord [dir=both, label="validate /\ncommit"];
+  coord -> student [dir=both, label="seat_auction"];
+  coord -> prof [dir=both, label="section_opening"];
+  coord -> room [dir=both, label="room_reservation\n(disputa entre deptos.)"];
+  student -> student [label="seat_swap"];
+  env -> room [dir=both, lhead=cluster_ag, label="percepts /\nactions"];
+}

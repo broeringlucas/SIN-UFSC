@@ -1,0 +1,27 @@
+// MatriculaUFSC - Figura 2: decomposição de objetivos
+// Renderizar: dot -Tpng -Gdpi=200 02_objetivos.dot -o 02_objetivos.png
+digraph objetivos {
+  graph [rankdir=TB, fontname="Carlito", nodesep=0.18, ranksep=0.5, pad=0.08];
+  node  [shape=box, style="rounded,filled", fontname="Carlito", fontsize=11.5, color="#1f4e79", fillcolor="#eaf1f8", margin="0.07,0.05", penwidth=1.1];
+  edge  [fontname="Carlito", fontsize=10, color="#44546a", arrowsize=0.7];
+
+  G0 [label="G0  Maximizar o número de alunos com grade satisfatória,\nrespeitando prioridades, capacidade, carga docente e normas", fillcolor="#dbe8f6", fontsize=12];
+
+  G1 [label="G1\nReceber e validar\nlances e pedidos"];
+  G2 [label="G2\nAlocar vagas escassas\npor mecanismo\njustificável"];
+  G3 [label="G3\nAjuste fino por\ntroca entre alunos"];
+  G4 [label="G4\nAdequar oferta à\ndemanda (abrir ou\nampliar turmas)"];
+  G5 [label="G5\nNormas, privacidade\ne observabilidade", fillcolor="#dff0e3", color="#2e7d4f"];
+
+  G0 -> G1 [label=" decompõe"];
+  G0 -> G2;
+  G0 -> G3;
+  G0 -> G4;
+  G0 -> G5;
+
+  {rank=same; G1; G2; G3; G4; G5;}
+  G1 -> G2 [label="habilita", constraint=false];
+  G2 -> G3 [label="refina", constraint=false];
+  G4 -> G3 [label="amplia", constraint=false, style=dashed];
+  G5 -> G4 [label="restringe", constraint=false, style=dashed, color="#2e7d4f", fontcolor="#2e7d4f"];
+}

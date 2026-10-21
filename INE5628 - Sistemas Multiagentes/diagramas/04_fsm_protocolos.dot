@@ -1,0 +1,55 @@
+// MatriculaUFSC - Figura 4: FSMs dos protocolos seat_auction, seat_swap e section_opening
+// Renderizar: dot -Tpng -Gdpi=200 04_fsm_protocolos.dot -o 04_fsm_protocolos.png
+digraph fsm {
+  graph [rankdir=TB, fontname="Carlito", fontsize=13, nodesep=0.22, ranksep=0.32, pad=0.08, labeljust=l];
+  node  [shape=ellipse, style="filled", fontname="Carlito", fontsize=11, color="#1f4e79", fillcolor="#eaf1f8", margin="0.05,0.02", penwidth=1.1];
+  edge  [fontname="Carlito", fontsize=10, color="#44546a", arrowsize=0.6];
+
+  subgraph cluster_auction {
+    label="seat_auction"; style="rounded"; color="#7f9ec0"; fontcolor="#1f4e79";
+    a_idle [label="Idle"];
+    a_wait [label="Aguardando\nlances"];
+    a_eval [label="Avaliando"];
+    a_val  [label="Validando\n(Registrar)"];
+    a_done [label="Concluído", fillcolor="#dff0e3", color="#2e7d4f"];
+    a_fail [label="Sem lance\nválido", fillcolor="#f8dcdc", color="#aa3333"];
+    a_idle -> a_wait [label="cfp"];
+    a_wait -> a_wait [label="propose /\nrefuse"];
+    a_wait -> a_eval [label="janela encerrada"];
+    a_eval -> a_val  [label="k maiores lances"];
+    a_eval -> a_fail [label="sem proposta\nválida"];
+    a_val -> a_eval  [label="violação:\npróximo", style=dashed, constraint=false];
+    a_val -> a_done  [label="accept / reject\n+ inform"];
+  }
+
+  subgraph cluster_swap {
+    label="seat_swap"; style="rounded"; color="#7f9ec0"; fontcolor="#1f4e79";
+    s_idle [label="Idle"];
+    s_wait [label="Aguardando\nresposta"];
+    s_val  [label="Validando\n(Registrar)"];
+    s_done [label="Trocado", fillcolor="#dff0e3", color="#2e7d4f"];
+    s_fail [label="Recusado /\nfalha", fillcolor="#f8dcdc", color="#aa3333"];
+    s_idle -> s_wait [label="propose(troca)"];
+    s_wait -> s_val  [label="accept-proposal"];
+    s_wait -> s_fail [label="reject /\ntimeout"];
+    s_val -> s_done  [label="commit atômico\n+ inform"];
+    s_val -> s_fail  [label="failure"];
+  }
+
+  subgraph cluster_open {
+    label="section_opening (Contract Net)"; style="rounded"; color="#7f9ec0"; fontcolor="#1f4e79";
+    o_idle [label="Idle"];
+    o_wait [label="Aguardando\npropostas"];
+    o_eval [label="Avaliando"];
+    o_room [label="Reservando\nsala"];
+    o_done [label="Turma\naberta", fillcolor="#dff0e3", color="#2e7d4f"];
+    o_fail [label="Falha de\nabertura", fillcolor="#f8dcdc", color="#aa3333"];
+    o_idle -> o_wait [label="cfp"];
+    o_wait -> o_wait [label="propose /\nrefuse"];
+    o_wait -> o_eval [label="janela encerrada"];
+    o_eval -> o_room [label="request(sala)"];
+    o_eval -> o_fail [label="sem proposta\nválida"];
+    o_room -> o_eval [label="refuse:\npróxima", style=dashed, constraint=false];
+    o_room -> o_done [label="agree →\naccept + inform"];
+  }
+}
