@@ -42,8 +42,6 @@ USO_DE_IA.md
 
 ## 3. Arquitetura
 
-![Arquitetura](docs/arquitetura.png)
-
 | Componente | Tipo | Responsabilidade |
 |---|---|---|
 | **AlunoAgent** | BDI | quer uma grade satisfatória; sinaliza demanda, escolhe turmas, dá lances, reage a vitórias, derrotas e cancelamentos |
