@@ -1,0 +1,46 @@
+# S0: cenário controlado para depuração (5 alunos)  (semente=7)
+trace: docs/evidencias/trace_S0_seed7.jsonl (725 registros, sha256=63e955f610e43987)
+
+Turmas:
+  INE1-A   OPEN      prof=prof_ine2 sala=R-I1 vagas=3/3 ['ana', 'bruno', 'eva']
+  INE2-A   OPEN      prof=prof_ine2 sala=R-I2 vagas=2/2 ['carla', 'davi']
+  INE3-A   OPEN      prof=prof_ine1 sala=R-I1 vagas=2/2 ['bruno', 'eva']
+  INE4-A   PLANNED   prof=None sala=None vagas=0/2 []
+  MTM1-A   OPEN      prof=prof_mtm1 sala=R-M1 vagas=2/2 ['carla', 'davi']
+  MTM1-B   OPEN      prof=prof_mtm1 sala=R-M1 vagas=2/2 ['ana', 'eva']
+
+Alunos:
+  ana    U=0.85 (R=1.00 S=1.00 E=0.00) satisfatória  turmas=['INE1-A', 'MTM1-B'] pontos=0
+  bruno  U=0.70 (R=0.50 S=1.00 E=1.00) satisfatória  turmas=['INE1-A', 'INE3-A'] pontos=0
+  carla  U=0.85 (R=1.00 S=1.00 E=0.00) satisfatória  turmas=['INE2-A', 'MTM1-A'] pontos=0
+  davi   U=0.85 (R=1.00 S=1.00 E=0.00) satisfatória  turmas=['INE2-A', 'MTM1-A'] pontos=0
+  eva    U=1.00 (R=1.00 S=1.00 E=1.00) satisfatória  turmas=['INE1-A', 'INE3-A', 'MTM1-B'] pontos=0
+
+Resumo: {
+  "alunos": 5,
+  "turmas_abertas": 5,
+  "ocupacao_vagas": 1.0,
+  "U_medio": 0.85,
+  "pct_satisfatoria": 100.0,
+  "gini_U": 0.056,
+  "U_medio_baixa_prioridade": 0.775,
+  "U_medio_alta_prioridade": 0.9,
+  "invariantes_violadas": [],
+  "mensagens": {
+    "inform": 93,
+    "cfp": 37,
+    "propose": 26,
+    "accept-proposal": 20,
+    "request": 29,
+    "agree": 6,
+    "refuse": 3,
+    "reject-proposal": 6,
+    "failure": 1,
+    "cancel": 1
+  },
+  "mudancas_de_crenca": 185,
+  "reconsideracoes": {
+    "mantida": 6,
+    "abandonada": 18
+  }
+}

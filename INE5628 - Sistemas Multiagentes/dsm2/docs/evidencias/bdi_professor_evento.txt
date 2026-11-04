@@ -1,0 +1,7 @@
+ 45 RECONSID. prof:prof_ine1#3 ABANDONADA — mudou ['available']: plano inválido após mudança de crença
+ 45 INTENÇÃO  prof:prof_ine1#3 abandonada (keep_commitment)
+ 45 RECONSID. prof:prof_ine1#4 MANTIDA — mudou ['available']: compromisso single-minded: plano ainda válido
+ 45 PLANO     deliver:INE1-A: escolhido withdraw entre [['withdraw', 2.0]]
+ 45 INTENÇÃO  prof:prof_ine1#5 adotada (withdraw)
+ 45 DESEJO    deliver:INE1-A: active → dropped  (compromisso retirado)
+ 46 INTENÇÃO  prof:prof_ine1#5 cumprida (withdraw)

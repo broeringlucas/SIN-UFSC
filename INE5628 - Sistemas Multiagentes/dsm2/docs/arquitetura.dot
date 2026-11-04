@@ -1,0 +1,37 @@
+// MatriculaUFSC - DSM2 - Figura 1: arquitetura do protótipo
+// Renderizar: dot -Tpng -Gdpi=170 arquitetura.dot -o arquitetura.png ; dot -Tsvg arquitetura.dot -o arquitetura.svg
+digraph arq {
+  graph [rankdir=TB, fontname="Carlito", fontsize=13, nodesep=0.3, ranksep=0.6, pad=0.1, newrank=true, splines=true];
+  node  [shape=box, style="rounded,filled", fontname="Carlito", fontsize=11.5, color="#1f4e79", fillcolor="#eaf1f8", margin="0.12,0.07", penwidth=1.1];
+  edge  [fontname="Carlito", fontsize=10, color="#44546a", arrowsize=0.7];
+
+  subgraph cluster_ag {
+    label="Agentes (agents/) — executados pelo Runtime (sim.py): ticks síncronos, semente única"; style="rounded"; color="#7f9ec0"; fontcolor="#1f4e79"; labeljust=l;
+    aluno [label="AlunoAgent (BDI)\ncrenças: oferta, pontos, matrículas\ndesejos: obtain:<disciplina>\nplanos: signal_demand, bid_single,\nbid_hedge, bid_tolerate"];
+    prof  [label="ProfessorAgent (BDI)\ncrenças: disponibilidade,\ncompromissos, reservas\ndesejos: respond:<cfp>, deliver:<turma>\nplanos: propose, decline,\nkeep_commitment, withdraw"];
+    dept  [label="DepartamentoAgent (deliberativo)\nFSM section_opening (Contract Net)\nFSM seat_auction (leilão selado)\ncascata, timeouts, rollback", fillcolor="#fff2cc", color="#b8860b"];
+    sala  [label="SalaAgent (reativo)\nregras R1–R7\nreserva provisória com TTL", fillcolor="#dff0e3", color="#2e7d4f"];
+  }
+
+  subgraph cluster_env {
+    label="Ambiente (environment.py): advance · perceive · execute · snapshot"; style="rounded"; color="#8a8a8a"; fontcolor="#444444"; labeljust=l;
+    bus [label="MessageBus (bus.py)\nlatência de 1 tick · ordem de entrega por mid\nmensagens FIPA-ACL (cfp, propose, accept, request, inform, failure, cancel) · injeção de falhas (drop/delay)", fillcolor="#dbe8f6", margin="0.2,0.1"];
+    env   [label="Eventos do cenário\nscenarios.py: S0 (controlado), S1 (semente)\nprofessor_unavailable, room_down, room_up", fillcolor="#f4f4f4", color="#777777"];
+    reg   [label="Registrar (registrar.py)\nserviço determinístico, ponto único de commit\nvaga · pré-requisito · conflito de horário\ndisciplina duplicada · saldo · carga\nabertura/cancelamento atômico · invariantes I1–I7", fillcolor="#f8dcdc", color="#aa3333"];
+  }
+
+  trace [label="TraceLogger (trace.py)\nJSONL: msg, belief_change, desire_change,\nplan_selected, intention_change, reconsider,\nfsm, reaction, registrar", fillcolor="#dbe8f6"];
+  met   [label="metrics.py · baselines.py\nutilidade U∈[0,1] normalizada · Gini\nleilão × ordem de chegada × prioridade", fillcolor="#f4f4f4", color="#777777"];
+
+  aluno -> bus [dir=both, label=" perceive /\n execute"];
+  prof  -> bus [dir=both];
+  dept  -> bus [dir=both, label=" cfp/propose/accept,\n request/inform"];
+  sala  -> bus [dir=both];
+  env   -> bus [style=dashed, label="eventos viram mensagens"];
+  bus   -> reg [dir=both, label=" commit_enroll,\n open_section,\n cancel_section"];
+  bus   -> trace [style=dashed, label=" todo envio e toda\n mudança BDI/FSM"];
+  reg   -> met [style=dotted, label="estado final"];
+  trace -> met [style=dotted];
+  {rank=same; env; bus;}
+  {rank=same; reg; trace;}
+}
