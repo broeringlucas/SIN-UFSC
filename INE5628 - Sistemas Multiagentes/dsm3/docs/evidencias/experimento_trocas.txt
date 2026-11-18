@@ -1,0 +1,27 @@
+S1, 16 alunos, 15 sementes: leilão com trocas x leilão sem trocas
+
+semente   U sem   U com  sat% sem  sat% com  pedidos  trocas  msgs +
+      1   0.611   0.611      43.8      43.8        1       0       8
+      2   0.635   0.635      31.2      31.2        0       0       0
+      3   0.517   0.517      18.8      18.8        0       0       0
+      4   0.722   0.722      56.2      56.2        0       0       0
+      5   0.640   0.640      43.8      43.8        0       0       0
+      6   0.718   0.718      62.5      62.5        0       0       0
+      7   0.716   0.720      62.5      62.5        1       1      11
+      8   0.689   0.693      43.8      43.8        1       1       7
+      9   0.571   0.571      31.2      31.2        0       0       0
+     10   0.711   0.711      68.8      68.8        0       0       0
+     11   0.586   0.590      37.5      43.8        1       1      11
+     12   0.750   0.750      62.5      62.5        0       0       0
+     13   0.677   0.677      50.0      50.0        0       0       0
+     14   0.644   0.644      43.8      43.8        0       0       0
+     15   0.754   0.754      75.0      75.0        0       0       0
+
+U médio          sem trocas    0.663   com trocas    0.664
+% satisfatórias  sem trocas   48.760   com trocas   49.180
+Gini de U        sem trocas    0.159   com trocas    0.159
+mensagens        sem trocas  667.533   com trocas  670.000
+
+sementes com U médio maior: 3; igual: 12; menor: 0
+trocas concluídas no total: 3 em 4 pedidos
+invariantes violadas: nenhuma

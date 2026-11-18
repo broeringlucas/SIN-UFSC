@@ -1,0 +1,26 @@
+ 30 CRENÇA    result:C-A: None → outbid  [resultado do leilão]
+ 30 INTENÇÃO  aluno:u2#2 abandonada (bid_single)
+ 30 PLANO     obtain:C: escolhido bid_tolerate entre [['bid_tolerate', 0.6]]
+ 30 INTENÇÃO  aluno:u2#3 adotada (bid_tolerate) ['C-B']
+ 39 CRENÇA    sec:C-A: {'course': 'C', 'dept': 'D', 'remaining': 2, 'slots': ['SEG08', 'QUA08']} → {'course': 'C', 'dept': 'D', 'remaining': 0, 'slots': ['SEG08', 'QUA08']}  [board]
+ 39 CRENÇA    sec:C-B: {'course': 'C', 'dept': 'D', 'remaining': 2, 'slots': ['TER10', 'QUI10']} → {'course': 'C', 'dept': 'D', 'remaining': 1, 'slots': ['TER10', 'QUI10']}  [board]
+ 44 CRENÇA    enrolled: {} → {'C-B': {'course': 'C', 'slots': ['TER10', 'QUI10']}}  [venceu leilão de C-B pagando 70]
+ 44 CRENÇA    points: 100 → 30  [pontos debitados]
+ 44 CRENÇA    result:C-B: None → won  [resultado do leilão]
+ 44 DESEJO    improve:C: None → active  (adotado)
+ 44 DESEJO    obtain:C: active → achieved  (disciplina obtida)
+ 44 INTENÇÃO  aluno:u2#3 cumprida (bid_tolerate)
+ 44 PLANO     improve:C: escolhido propose_swap entre [['propose_swap', 1.0]]
+ 44 INTENÇÃO  aluno:u2#4 adotada (propose_swap)
+ 44 CRENÇA    swap_pending:C: None → swap:u2:C-B:C-A:1  [pedido de troca enviado]
+ 50 CRENÇA    swap_pending:C: swap:u2:C-B:C-A:1 → None  [resposta do departamento recebida]
+ 50 CRENÇA    enrolled: {'C-B': {'course': 'C', 'slots': ['TER10', 'QUI10']}} → {'C-A': {'course': 'C', 'slots': ['SEG08', 'QUA08']}}  [troca concluída: C-B -> C-A]
+ 50 CRENÇA    result:C-B: won → None  [turma cedida na troca]
+ 50 CRENÇA    result:C-A: outbid → won  [turma recebida na troca]
+ 50 DESEJO    improve:C: active → achieved  (turma atual sem horário indesejado)
+ 50 INTENÇÃO  aluno:u2#4 cumprida (propose_swap)
+ 45 NOTA      u2 pede trocar C-B por C-A; candidatos: ['v1', 'v2']
+ 45 FSM       seat_swap[swap:u2:C-B:C-A:1] Idle → Procurando  2 possível(is) parceiro(s) em C-A
+ 45 FSM       seat_swap[swap:u2:C-B:C-A:1] Procurando → AguardandoParceiro  cfp de troca a v1
+ 47 FSM       seat_swap[swap:u2:C-B:C-A:1] AguardandoParceiro → ConfirmandoRegistrar  v1 aceitou; pedindo troca atômica ao Registrar
+ 49 FSM       seat_swap[swap:u2:C-B:C-A:1] ConfirmandoRegistrar → Concluida  u2:C-B->C-A  v1:C-A->C-B

@@ -1,0 +1,40 @@
+# S2: troca de vagas entre alunos (4 alunos, 1 disciplina, 2 turmas)  (semente=1)
+trace: docs/evidencias/trace_S2_seed1.jsonl (288 registros, sha256=33fa6ac5ccbd7e4c)
+
+Turmas:
+  C-A      OPEN      prof=P1 sala=R1 vagas=2/2 ['u2', 'v2']
+  C-B      OPEN      prof=P1 sala=R1 vagas=2/2 ['u1', 'v1']
+
+Alunos:
+  u1     U=1.00 (R=1.00 S=1.00 E=1.00) satisfatória  turmas=['C-B'] pontos=0
+  u2     U=1.00 (R=1.00 S=1.00 E=1.00) satisfatória  turmas=['C-A'] pontos=30
+  v1     U=1.00 (R=1.00 S=1.00 E=1.00) satisfatória  turmas=['C-B'] pontos=0
+  v2     U=1.00 (R=1.00 S=1.00 E=1.00) satisfatória  turmas=['C-A'] pontos=0
+
+Resumo: {
+  "alunos": 4,
+  "turmas_abertas": 2,
+  "ocupacao_vagas": 1.0,
+  "U_medio": 1.0,
+  "pct_satisfatoria": 100.0,
+  "gini_U": 0.0,
+  "U_medio_baixa_prioridade": 1.0,
+  "U_medio_alta_prioridade": 1.0,
+  "invariantes_violadas": [],
+  "mensagens": {
+    "inform": 29,
+    "cfp": 17,
+    "propose": 11,
+    "accept-proposal": 6,
+    "request": 12,
+    "agree": 3,
+    "reject-proposal": 5,
+    "refuse": 2,
+    "failure": 2
+  },
+  "mudancas_de_crenca": 79,
+  "reconsideracoes": {
+    "abandonada": 5,
+    "mantida": 1
+  }
+}

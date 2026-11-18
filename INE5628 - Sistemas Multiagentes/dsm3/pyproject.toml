@@ -1,0 +1,13 @@
+[project]
+name = "matriculaufsc"
+version = "0.2.0"
+description = "MatriculaUFSC - SMA de ajuste de matrícula e oferta de turmas (INE5628, DSM2)"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

@@ -1,0 +1,43 @@
+### DSM2 (código entregue em 03/11)
+1. cancelamento de turma em nome de aluno inexistente
+    antes : OPEN, matriculados=[]
+    depois: CANCELLED, matriculados=[]
+    => ESTADO ALTERADO; invariantes violadas: nenhuma
+
+2. falsa retirada de professor enviada por participante inexistente
+    antes : OPEN, matriculados=[]; disponibilidade de prof_ine1 = 20 horários
+    depois: CANCELLED, matriculados=[]; disponibilidade de prof_ine1 = 18 horários
+    => ESTADO ALTERADO; invariantes violadas: nenhuma
+
+3. matrícula com custo NaN
+    antes : saldo de ana = 100; OPEN, matriculados=[]
+    depois: saldo de ana = nan; OPEN, matriculados=['ana']
+    => ESTADO ALTERADO; invariantes violadas: ['I6 aluno ana: pontos inconsistentes (saldo nan, gasto nan)']
+
+4. requisição ao Registrar sem o campo op
+    antes : OPEN, matriculados=[]
+    depois: OPEN, matriculados=[]
+    => EXCEÇÃO KeyError: 'op'; invariantes violadas: nenhuma
+
+
+### DSM3 (esta versão)
+1. cancelamento de turma em nome de aluno inexistente
+    antes : OPEN, matriculados=[]
+    depois: OPEN, matriculados=[]
+    => estado intacto; invariantes violadas: nenhuma
+
+2. falsa retirada de professor enviada por participante inexistente
+    antes : OPEN, matriculados=[]; disponibilidade de prof_ine1 = 20 horários
+    depois: OPEN, matriculados=[]; disponibilidade de prof_ine1 = 20 horários
+    => estado intacto; invariantes violadas: nenhuma
+
+3. matrícula com custo NaN
+    antes : saldo de ana = 100; OPEN, matriculados=[]
+    depois: saldo de ana = 100; OPEN, matriculados=[]
+    => estado intacto; invariantes violadas: nenhuma
+
+4. requisição ao Registrar sem o campo op
+    antes : OPEN, matriculados=[]
+    depois: OPEN, matriculados=[]
+    => estado intacto; invariantes violadas: nenhuma
+
